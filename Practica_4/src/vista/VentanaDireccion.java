@@ -104,6 +104,111 @@ public class VentanaDireccion extends JFrame {
         
         
     }
+
+    public JPanel getPanel() {
+        return panel;
+    }
+
+    public void setPanel(JPanel panel) {
+        this.panel = panel;
+    }
+
+    public JPanel getPanelVista() {
+        return panelVista;
+    }
+
+    public void setPanelVista(JPanel panelVista) {
+        this.panelVista = panelVista;
+    }
+
+    public JPanel getPanelFondo() {
+        return panelFondo;
+    }
+
+    public void setPanelFondo(JPanel panelFondo) {
+        this.panelFondo = panelFondo;
+    }
+
+    public List<JLabel> getEtiquetaList() {
+        return etiquetaList;
+    }
+
+    public void setEtiquetaList(List<JLabel> etiquetaList) {
+        this.etiquetaList = etiquetaList;
+    }
+
+    public List<JButton> getBotonList() {
+        return botonList;
+    }
+
+    public void setBotonList(List<JButton> botonList) {
+        this.botonList = botonList;
+    }
+
+    public List<JTextField> getTxtList() {
+        return txtList;
+    }
+
+    public void setTxtList(List<JTextField> txtList) {
+        this.txtList = txtList;
+    }
+
+    public JComboBox getCombo() {
+        return combo;
+    }
+
+    public void setCombo(JComboBox combo) {
+        this.combo = combo;
+    }
+
+    public GestionDato getGestionDato() {
+        return gestionDato;
+    }
+
+    public void setGestionDato(GestionDato gestionDato) {
+        this.gestionDato = gestionDato;
+    }
+
+    public Object[][] getDatos() {
+        return datos;
+    }
+
+    public void setDatos(Object[][] datos) {
+        this.datos = datos;
+    }
+
+    public Object[] getEncabezado() {
+        return encabezado;
+    }
+
+    public void setEncabezado(Object[] encabezado) {
+        this.encabezado = encabezado;
+    }
+
+    public DefaultTableModel getModeloTabla() {
+        return modeloTabla;
+    }
+
+    public void setModeloTabla(DefaultTableModel modeloTabla) {
+        this.modeloTabla = modeloTabla;
+    }
+
+    public JTable getTabla() {
+        return tabla;
+    }
+
+    public void setTabla(JTable tabla) {
+        this.tabla = tabla;
+    }
+
+    public JScrollPane getScroll() {
+        return scroll;
+    }
+
+    public void setScroll(JScrollPane scroll) {
+        this.scroll = scroll;
+    }
+    
     
     
 

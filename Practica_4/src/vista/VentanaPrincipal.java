@@ -36,6 +36,7 @@ public class VentanaPrincipal extends JFrame {
         this.iniciaComponente();
         this.setVisible(true);
         this.setDefaultCloseOperation(3);
+        this.setResizable(false);
     }
 
     public void iniciaComponente() {
