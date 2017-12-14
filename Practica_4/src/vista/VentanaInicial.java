@@ -20,20 +20,23 @@ import javax.swing.JMenuItem;
  *
  * @author Marcelo11
  */
-public class VentanaInicial extends JFrame
-{
+
+public class VentanaInicial extends JFrame{
     private JDesktopPane escritorio;
     private JMenuBar barraMenu;
     private JMenu menu1;
     private JMenu menu2;
     private JMenu menu3;
+    private JMenu menu4;
+    private JMenu menu5;
+    private JMenu menu6;
     private List<JMenuItem> menuItemList;
     private GestionDato gD;
     
 
-    public VentanaInicial(GestionDato gD) {
-        super("Practica 10");
-        this.setSize(3000, 780);
+    public VentanaInicial(GestionDato gD) throws HeadlessException {
+        super("Practica_4");
+        this.setSize(1366, 730);
         this.setDefaultCloseOperation(3);
         this.gD=gD;
         this.iniciaComponentes();
@@ -42,51 +45,60 @@ public class VentanaInicial extends JFrame
     {
         this.escritorio = new JDesktopPane();
         this.barraMenu = new JMenuBar();
-        
-        this.menu1 = new JMenu("Registro");
         this.menuItemList = new ArrayList<JMenuItem>();
-        this.menuItemList.add(new JMenuItem("Registrar Rector"));
-        this.menuItemList.add(new JMenuItem("Registrar Universidad"));
-        this.menuItemList.add(new JMenuItem("Registrar Aspirante"));
-        this.menuItemList.add(new JMenuItem("Registrar Carrera"));
-       
         
-        this.menu2 = new JMenu("Inscripcion");
-        this.menuItemList.add(new JMenuItem("Inscribir"));
+        this.menu1 = new JMenu("Parqueadero");
+        this.menuItemList.add(new JMenuItem("Registrar Parqueadero"));
+                
+        this.menu2 = new JMenu("Tiquet");
+        this.menuItemList.add(new JMenuItem("Crear Tiquet"));
+                
+        
+        this.menu3= new JMenu("Vehiculo");
+        this.menuItemList.add(new JMenuItem("Registrar Vehiculo"));
         
         
-        this.menu3= new JMenu("Consultas");
-        this.menuItemList.add(new JMenuItem("Aspirantes ya registrados"));
-        this.menuItemList.add(new JMenuItem("Aspirantes en carrera"));
+        this.menu4= new JMenu("Direccion");
+        this.menuItemList.add(new JMenuItem("Añadir Direccion"));
         
-     
+        this.menu5= new JMenu("Trabajador");
+        this.menuItemList.add(new JMenuItem("Registar Trabajador"));
+        
         this.setContentPane(escritorio);
         this.setJMenuBar(barraMenu);
       
         this.barraMenu.add(menu1);
-        this.menu1.add(this.menuItemList.get(0));
-        this.menu1.add(this.menuItemList.get(1));
-        this.menu1.add(this.menuItemList.get(2));
-        this.menu1.add(this.menuItemList.get(3));
+        this.menu1.add(this.menuItemList.get(0));    
         
         this.barraMenu.add(menu2);
-        this.menu2.add(this.menuItemList.get(4));
-        
+        this.menu2.add(this.menuItemList.get(1));
+                
         this.barraMenu.add(menu3);
-        this.menu3.add(this.menuItemList.get(5));
-        this.menu3.add(this.menuItemList.get(6));
+        this.menu3.add(this.menuItemList.get(2));
+                
+        this.barraMenu.add(menu4);
+        this.menu4.add(this.menuItemList.get(3));
         
-        
-        
-        /*this.menuItemList.get(0).addActionListener(new EventoVentanaInicial(this));
+        this.barraMenu.add(menu5);
+        this.menu5.add(this.menuItemList.get(4));
+                
+        /*
+        this.menuItemList.get(0).addActionListener(new EventoVentanaInicial(this));
         this.menuItemList.get(1).addActionListener(new EventoVentanaInicial(this));
         this.menuItemList.get(2).addActionListener(new EventoVentanaInicial(this));
         this.menuItemList.get(3).addActionListener(new EventoVentanaInicial(this));
         this.menuItemList.get(4).addActionListener(new EventoVentanaInicial(this));
-        this.menuItemList.get(5).addActionListener(new EventoVentanaInicial(this));
-        this.menuItemList.get(6).addActionListener(new EventoVentanaInicial(this));
-        */
         
+        */        
+        
+    }
+
+    public JMenu getMenu4() {
+        return menu4;
+    }
+
+    public void setMenu4(JMenu menu4) {
+        this.menu4 = menu4;
     }
 
     public JDesktopPane getEscritorio() {
@@ -144,7 +156,5 @@ public class VentanaInicial extends JFrame
     public void setgD(GestionDato gD) {
         this.gD = gD;
     }
-    
-    
     
 }

@@ -5,10 +5,32 @@
  */
 package controlador;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import vista.VentanaInicial;
+
 /**
  *
  * @author Estudiante
  */
-public class EventoVentanaInicial {
+public class EventoVentanaInicial implements ActionListener{
+    private VentanaInicial ventanaInicial;
+
+    public EventoVentanaInicial(VentanaInicial ventanaInicial) {
+        this.ventanaInicial = ventanaInicial;
+    }
+
+    public VentanaInicial getVentanaInicial() {
+        return ventanaInicial;
+    }
+
+    public void setVentanaInicial(VentanaInicial ventanaInicial) {
+        this.ventanaInicial = ventanaInicial;
+    }
+    
+    @Override
+    public void actionPerformed(ActionEvent ae){
+        
+    }
     
 }
