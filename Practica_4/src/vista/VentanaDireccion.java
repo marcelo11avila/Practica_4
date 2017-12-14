@@ -5,80 +5,107 @@
  */
 package vista;
 
+import controlador.GestionDato;
+import java.awt.BorderLayout;
+import java.awt.GridLayout;
+import java.awt.LayoutManager;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JDesktopPane;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.JTextField;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author Estudiante
  */
 public class VentanaDireccion extends JFrame {
-    
-     private JDesktopPane escritorio;
-    private JMenuBar barraMenu;
-    private JMenu menu1;
-    private JMenu menu2;
-    private JMenu menu3;
-    private JMenu menu4;
-    private JMenu menu5;
-    private JMenu menu6;
-    private List<JMenuItem> itemMenuList;
-   /* private GestionDato gestionDato;
+    private JPanel panel;
+    private JPanel panelVista;
+    private JPanel panelFondo;
+    private List<JLabel> etiquetaList;
+    private List<JButton> botonList;
+    private List<JTextField> txtList;
+    private JComboBox combo;
+    private GestionDato gestionDato;
+    private Object[][] datos;
+    private Object[] encabezado;
+    private DefaultTableModel modeloTabla;
+    private JTable tabla;
+    private JScrollPane scroll;
 
-    public VentanaPrincipal(GestionDato gestionDato) {
-        super("Gestion Inscripcion");
-        this.setSize(800, 600);
-        this.setDefaultCloseOperation(3);
-        this.gestionDato=gestionDato;
+    public VentanaDireccion(GestionDato gestionDato) {
+        super("Registro de Direccion");
+        this.gestionDato = gestionDato;
+        this.setSize(400, 300);
         this.setVisible(true);
         this.iniciaComponentes();
     }
-    
     public void iniciaComponentes(){
-        this.escritorio= new JDesktopPane();
-        this.barraMenu= new JMenuBar();
-        this.menu1= new JMenu("Registro de Persona");
-        this.menu2= new JMenu("Registro de Universidad");
-        this.menu3= new JMenu("Registro de Carrera");
-        this.menu4= new JMenu("Inscripcion");
-        this.menu5= new JMenu("Consulta Universidad");
-        this.menu6= new JMenu("Consulta Carrera");
-        this.itemMenuList= new ArrayList<JMenuItem>();
-        this.itemMenuList.add(new JMenuItem("Registrar Persona"));
-        this.itemMenuList.add(new JMenuItem("Registrar Universidad"));
-        this.itemMenuList.add(new JMenuItem("Registrar Carrera"));
-        this.itemMenuList.add(new JMenuItem("Registrar Inscripcion"));
-        this.itemMenuList.add(new JMenuItem("consulta listado de Estudiantes"));
-        this.itemMenuList.add(new JMenuItem("Registrar Carreras Estudiante"));
+        LayoutManager disenioFondo=new GridLayout(2,1);
+        LayoutManager disenio = new GridLayout(6,2);
         
-        this.setContentPane(this.escritorio);
-        this.setJMenuBar(barraMenu);
-        this.barraMenu.add(menu1);
-        this.barraMenu.add(menu2);
-        this.barraMenu.add(menu3);
-        this.barraMenu.add(menu4);
-        this.barraMenu.add(menu5);
-        this.barraMenu.add(menu6);
-        this.menu1.add(this.itemMenuList.get(0));
-        this.menu2.add(this.itemMenuList.get(1));
-        this.menu3.add(this.itemMenuList.get(2));
-        this.menu4.add(this.itemMenuList.get(3));
-        this.menu5.add(this.itemMenuList.get(4));
-        this.menu6.add(this.itemMenuList.get(5));
+        this.panel=new JPanel(disenio);
+        this.panelFondo=new JPanel(disenioFondo);
+        this.panelVista=new JPanel(new BorderLayout());
         
-        this.itemMenuList.get(0).addActionListener(new EventoVentanaPrincipal(this));
-        this.itemMenuList.get(1).addActionListener(new EventoVentanaPrincipal(this));
-        this.itemMenuList.get(2).addActionListener(new EventoVentanaPrincipal(this));
-        this.itemMenuList.get(3).addActionListener(new EventoVentanaPrincipal(this));
-        this.itemMenuList.get(4).addActionListener(new EventoVentanaPrincipal(this));
-        this.itemMenuList.get(5).addActionListener(new EventoVentanaPrincipal(this));
+        this.etiquetaList=new ArrayList<JLabel>();
+        this.etiquetaList.add(new JLabel("Ciudad:"));
+        this.etiquetaList.add(new JLabel("Calle Principal:"));
+        this.etiquetaList.add(new JLabel("Calle Secundario:"));
+        
+        
+        this.txtList=new ArrayList<JTextField>();
+        this.txtList.add(new JTextField());
+        this.txtList.add(new JTextField());
+        this.txtList.add(new JTextField());
+        
+        
+        this.botonList=new ArrayList<JButton>();
+        this.botonList.add(new JButton("Guardar "));
+        this.botonList.add(new JButton("Limpiar "));
+        
+        for(int i =0;i<5;i++){
+            this.panel.add(this.etiquetaList.get(i));
+            this.panel.add(this.txtList.get(i));
+        }
+        //this.botonList.get(0).addActionListener(new EventoVentanaAspirante(gestionDato,this));
+        //this.botonList.get(1).addActionListener(new EventoVentanaAspirante(gestionDato,this));
+        
+        this.encabezado=new Object[3];
+        this.encabezado[0]="Ciudad";
+        this.encabezado[1]="Calle Prin";
+        this.encabezado[2]="Calle Secun";
+        
+        
+        //this.datos=cargaDatosTabla(this.gestionDato.getAspiranteList().size() ,5);
+        
+        this.modeloTabla=new DefaultTableModel(this.datos,this.encabezado);
+        this.tabla=new JTable(this.modeloTabla);
+        this.scroll= new JScrollPane(this.tabla);
+                
+        this.panelVista.add(this.scroll,BorderLayout.CENTER);
+        this.panel.add(this.botonList.get(0));
+        this.panel.add(this.botonList.get(1));
+        this.panelFondo.add(this.panel);
+        this.panelFondo.add(this.panelVista);
+        this.add(this.panelFondo);
+        
+        
+        
     }
+    
+    
 
-    */
     
 }
