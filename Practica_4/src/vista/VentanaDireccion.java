@@ -24,6 +24,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
+import modelo.Direccion;
 
 /**
  *
@@ -88,7 +89,7 @@ public class VentanaDireccion extends JFrame {
         this.encabezado[2]="Calle Secun";
         
         
-        //this.datos=cargaDatosTabla(this.gestionDato.getAspiranteList().size() ,5);
+        this.datos=cargaDatosTabla(this.gestionDato.getDireccionList().size() ,3);
         
         this.modeloTabla=new DefaultTableModel(this.datos,this.encabezado);
         this.tabla=new JTable(this.modeloTabla);
@@ -103,6 +104,20 @@ public class VentanaDireccion extends JFrame {
         
         
         
+    }
+    
+    public Object[][] cargaDatosTabla(int h,int w){
+        Object[][] retorno=new Object[h][w];
+        int i=0;
+        for(Direccion d:this.gestionDato.getDireccionList()){
+            retorno[i][0]=d.getCiudad();
+            retorno[i][1]=d.getCallePrin();
+            retorno[i][2]=d.getCalleSec();
+           
+            i++;
+        }
+        
+        return retorno;
     }
 
     public JPanel getPanel() {

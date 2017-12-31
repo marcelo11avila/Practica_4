@@ -6,6 +6,10 @@
 package vista;
 
 import controlador.GestionDato;
+import java.util.ArrayList;
+import java.util.List;
+import modelo.Direccion;
+import modelo.Parqueadero;
 
 /**
  *
@@ -18,7 +22,9 @@ public class Principal {
      */
     public static void main(String[] args) {
         // TODO code application logic here
-        GestionDato gD = new GestionDato();
+        List<Direccion> d = new ArrayList<Direccion>();
+        List<Parqueadero> p = new ArrayList<Parqueadero>();
+        GestionDato gD = new GestionDato(d,p);
         VentanaPrincipal vP = new VentanaPrincipal(gD);
     }
     
