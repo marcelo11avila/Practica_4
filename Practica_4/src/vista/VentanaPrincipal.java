@@ -27,13 +27,14 @@ public class VentanaPrincipal extends JFrame {
     private JButton boton;
     private GestionDato gD;
     private List<JMenuItem> itemMenuList;
-     private List<JButton> botonList;
+    private List<JButton> botonList;
     private JMenuBar barraMenu;
 
     public VentanaPrincipal(GestionDato g) {
         super("Gestion de Inscripcion");
         this.gD = g;
         this.setSize(450, 400);
+        this.setLocation(500, 100);
         this.iniciaComponente();
         this.setVisible(true);
         this.setDefaultCloseOperation(3);
@@ -41,7 +42,7 @@ public class VentanaPrincipal extends JFrame {
     }
 
     public void iniciaComponente() {
-    
+
         this.itemMenuList = new ArrayList<JMenuItem>();
 
         ImageIcon img = new ImageIcon("AutoGif.gif");
@@ -53,8 +54,7 @@ public class VentanaPrincipal extends JFrame {
         this.itemMenuList.add(new JMenuItem("Trabajador"));
 
         this.barraMenu = new JMenuBar();
-        
-        
+
         for (int i = 0; i < 5; i++) {
             this.barraMenu.add(this.itemMenuList.get(i));
         }
@@ -82,7 +82,7 @@ public class VentanaPrincipal extends JFrame {
 
     public JPanel getPanel() {
         return panel;
-        
+
     }
 
     public void setPanel(JPanel panel) {
@@ -120,7 +120,6 @@ public class VentanaPrincipal extends JFrame {
     public void setgD(GestionDato gD) {
         this.gD = gD;
     }
-
 
     public List<JMenuItem> getItemMenuList() {
         return itemMenuList;

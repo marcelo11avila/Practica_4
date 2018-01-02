@@ -36,29 +36,30 @@ public class EventoVentanaInicial implements ActionListener {
     }
 
     public void actionPerformed(ActionEvent e) {
+        try {
+            if (e.getSource().equals(this.ventanaInicial.getItemMenuList().get(0))) {
+                VentanaDireccion vD = new VentanaDireccion(this.ventanaInicial.getgD());
+                vD.setVisible(true);
+            }
+            if (e.getSource().equals(this.ventanaInicial.getItemMenuList().get(1))) {
+                VentanaParqueadero vP = new VentanaParqueadero(this.ventanaInicial.getgD());
+                vP.setVisible(true);
+            }
+            if (e.getSource().equals(this.ventanaInicial.getItemMenuList().get(2))) {
+                VentanaVehiculo vV = new VentanaVehiculo(this.ventanaInicial.getgD());
+                vV.setVisible(true);
+            }
+            if (e.getSource().equals(this.ventanaInicial.getItemMenuList().get(3))) {
+                VentanaTicket vT = new VentanaTicket(this.ventanaInicial.getgD());
+                vT.setVisible(true);
+            }
+            if (e.getSource().equals(this.ventanaInicial.getItemMenuList().get(4))) {
+                VentanaTrabajador vT2 = new VentanaTrabajador(this.ventanaInicial.getgD());
+                vT2.setVisible(true);
+            }
+        } catch (Exception ex) {
 
-        if (e.getSource().equals(this.ventanaInicial.getItemMenuList().get(0))) {
-            VentanaDireccion vD = new VentanaDireccion(this.ventanaInicial.getgD());
-            vD.setVisible(true);
         }
-        if (e.getSource().equals(this.ventanaInicial.getItemMenuList().get(1))) {
-            VentanaParqueadero vP = new VentanaParqueadero(this.ventanaInicial.getgD());
-            vP.setVisible(true);
-        }
-        if (e.getSource().equals(this.ventanaInicial.getItemMenuList().get(2))) {
-            VentanaVehiculo vV = new VentanaVehiculo(this.ventanaInicial.getgD());
-            vV.setVisible(true);
-        }
-          if (e.getSource().equals(this.ventanaInicial.getItemMenuList().get(3))) {
-            VentanaTicket vT = new VentanaTicket(this.ventanaInicial.getgD());
-            vT.setVisible(true);
-        }
-          if (e.getSource().equals(this.ventanaInicial.getItemMenuList().get(4))) {
-            VentanaTrabajador vT2 = new VentanaTrabajador(this.ventanaInicial.getgD());
-            vT2.setVisible(true);
-        }
-        
 
-        
     }
 }

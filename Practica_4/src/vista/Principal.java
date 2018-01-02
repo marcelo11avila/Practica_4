@@ -28,9 +28,9 @@ public class Principal {
         List<Parqueadero> p = new ArrayList<Parqueadero>();
         List<Ticket> ti = new ArrayList<Ticket>();
         List<Trabajador> t = new ArrayList<Trabajador>();
-        GestionDato gD = new GestionDato(d,p,ti,t);
+        GestionDato gD = new GestionDato(d, p, ti, t);
         VentanaPrincipal vP = new VentanaPrincipal(gD);
-        
+
     }
-    
+
 }
