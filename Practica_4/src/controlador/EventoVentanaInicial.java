@@ -8,6 +8,8 @@ package controlador;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import vista.VentanaInicial;
+import vista.VentanaTicket;
+import vista.VentanaTrabajador;
 
 /**
  *
@@ -30,7 +32,17 @@ public class EventoVentanaInicial implements ActionListener{
     
     @Override
     public void actionPerformed(ActionEvent ae){
+        /*
+         if(ae.getSource().equals(this.ventanaInicial.getItemMenuList().get(1))){
+            VentanaTicket vt = new VentanaTicket(this.ventanaInicial.getgD());
+            vt.setVisible(true);
+        }
+        
+        if(ae.getSource().equals(this.ventanaInicial.getItemMenuList().get(2))){
+             VentanaTrabajador vA = new VentanaTrabajador(this.ventanaInicial.getgD());
+            vA.setVisible(true);
         
     }
-    
+    */
+}
 }

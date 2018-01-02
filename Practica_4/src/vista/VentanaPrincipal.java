@@ -1,5 +1,6 @@
 package vista;
 
+import controlador.EventoVentanaInicial;
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
@@ -27,6 +28,7 @@ public class VentanaPrincipal extends JFrame {
     private GestionDato gD;
     private List<JMenu> menuLista;
     private List<JMenuItem> itemMenuList;
+     private List<JButton> botonList;
     private JMenuBar barraMenu;
 
     public VentanaPrincipal(GestionDato g) {
@@ -70,9 +72,9 @@ public class VentanaPrincipal extends JFrame {
         this.panelVacio.add(this.boton);
         
 
-        //for (int i = 0; i < 6; i++) {
-        //	this.botonList.get(i).addActionListener(new EventoPrincipal(this, this.gD));
-        //}
+        for (int i = 0; i < 6; i++) {
+        	//this.botonList.get(i).addActionListener(new EventoVentanaInicial(this, this.gD));
+        }
         this.panel.add(this.panelVacio, BorderLayout.CENTER);
         this.add(panel);
 
@@ -80,6 +82,7 @@ public class VentanaPrincipal extends JFrame {
 
     public JPanel getPanel() {
         return panel;
+        
     }
 
     public void setPanel(JPanel panel) {
