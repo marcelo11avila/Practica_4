@@ -15,6 +15,7 @@ import modelo.Parqueadero;
 import modelo.Persona;
 import modelo.Ticket;
 import modelo.Trabajador;
+import modelo.Vehiculo;
 
 /**
  *
@@ -26,8 +27,8 @@ public class Principal {
      * @param args the command line arguments
      */
     public static void main(String[] args) throws IOException {
-        // TODO code application logic here
-         File archivo = new File("C:\\progra");
+    
+        File archivo = new File("C:\\progra");
         
         File archivoParq = new File("C:\\progra\\archivoParqueadero.txt");
         File archivoDire = new File("C:\\progra\\archivoDireccion.txt");
@@ -39,12 +40,13 @@ public class Principal {
         List<Parqueadero> p = new ArrayList<Parqueadero>();
         List<Ticket> ti = new ArrayList<Ticket>();
         List<Trabajador> t = new ArrayList<Trabajador>();
-        
-
+        List<Vehiculo> v = new ArrayList<Vehiculo>();
         List<Persona> due = new ArrayList<Persona>();
-        GestionDato gD = new GestionDato(d,p,ti,t,due,archivoParq,archivoDire);
+        
+        GestionDato gD = new GestionDato(v,d,p,ti,t,due,archivoParq,archivoDire);
 
         VentanaPrincipal vP = new VentanaPrincipal(gD);
+         VentanaVehiculo vV = new VentanaVehiculo(gD);
 
     }
 

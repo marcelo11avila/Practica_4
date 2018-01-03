@@ -47,7 +47,7 @@ public class EventoVentanaInicial implements ActionListener {
             }
             if (e.getSource().equals(this.ventanaInicial.getItemMenuList().get(2))) {
                 VentanaVehiculo vV = new VentanaVehiculo(this.ventanaInicial.getgD());
-                vV.setVisible(true);
+                
             }
             if (e.getSource().equals(this.ventanaInicial.getItemMenuList().get(3))) {
                 VentanaTicket vT = new VentanaTicket(this.ventanaInicial.getgD());

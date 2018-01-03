@@ -20,6 +20,7 @@ import modelo.Parqueadero;
 import modelo.Persona;
 import modelo.Ticket;
 import modelo.Trabajador;
+import modelo.Vehiculo;
 
 /**
  *
@@ -31,15 +32,17 @@ public class GestionDato {
     private List<Ticket>TicketList;
     private List<Trabajador>TrabajadorList;
     private List<Persona> DuenioList;
+    private List<Vehiculo> vehiculoList;
     private File datosDireccion;
     private File datosParqueadero;
 
-    public GestionDato(List<Direccion> DireccionList, List<Parqueadero> ParqueaderoList, List<Ticket> TicketList, List<Trabajador> TrabajadorList, List<Persona> DuenioList, File datosDireccion, File datosParqueadero) {
+    public GestionDato(List<Vehiculo> VehiculoList,List<Direccion> DireccionList, List<Parqueadero> ParqueaderoList, List<Ticket> TicketList, List<Trabajador> TrabajadorList, List<Persona> DuenioList, File datosDireccion, File datosParqueadero) {
         this.DireccionList = DireccionList;
         this.ParqueaderoList = ParqueaderoList;
         this.TicketList = TicketList;
         this.TrabajadorList = TrabajadorList;
         this.DuenioList = DuenioList;
+        this.vehiculoList = VehiculoList;
         this.datosDireccion = datosDireccion;
         this.datosParqueadero = datosParqueadero;
     }
@@ -60,6 +63,14 @@ public class GestionDato {
 
     public void setDatosParqueadero(File datosParqueadero) {
         this.datosParqueadero = datosParqueadero;
+    }
+
+    public List<Vehiculo> getVehiculoList() {
+        return vehiculoList;
+    }
+
+    public void setVehiculoList(List<Vehiculo> vehiculoList) {
+        this.vehiculoList = vehiculoList;
     }
 
     
@@ -110,6 +121,10 @@ public class GestionDato {
      public boolean addDireccion(Direccion direccion) {
         
 	return this.DireccionList.add(direccion);
+    }
+      public boolean addVehiculo(Vehiculo vehiculo) {
+        
+	return this.vehiculoList.add(vehiculo);
     }
     public boolean addParqueadero(Parqueadero parqueadero) {
         
@@ -261,6 +276,16 @@ public class GestionDato {
             return null;
         }
     }
+     
+    // public Object[] comboBoxRector() {
+	//	Object[] combo = new Object[this.getPersonaList().size()];
+	//	int i = 0;
+	//	for (Rector r : this.getRectorList()) {
+	//		combo[i] = r.getNombre() + " " + r.getApellido();
+	//		i++;
+	//	}
+	//	return combo;
+	//}
    
    
 }
