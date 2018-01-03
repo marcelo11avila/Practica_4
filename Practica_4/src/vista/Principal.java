@@ -46,7 +46,7 @@ public class Principal {
         GestionDato gD = new GestionDato(v,d,p,ti,t,due,archivoParq,archivoDire);
 
         VentanaPrincipal vP = new VentanaPrincipal(gD);
-         VentanaVehiculo vV = new VentanaVehiculo(gD);
+        
 
     }
 
