@@ -20,6 +20,7 @@ import modelo.Parqueadero;
 import modelo.Persona;
 import modelo.Ticket;
 import modelo.Trabajador;
+import modelo.Vehiculo;
 
 /**
  *
@@ -30,18 +31,30 @@ public class GestionDato {
     private List<Parqueadero> ParqueaderoList;
     private List<Ticket>TicketList;
     private List<Trabajador>TrabajadorList;
+
+       private List<Vehiculo>VehiculoList;
+
     private List<Persona> DuenioList;
     private File datosDireccion;
     private File datosParqueadero;
 
+
+
+
+
     public GestionDato(List<Direccion> DireccionList, List<Parqueadero> ParqueaderoList, List<Ticket> TicketList, List<Trabajador> TrabajadorList, List<Persona> DuenioList, File datosDireccion, File datosParqueadero) {
+
         this.DireccionList = DireccionList;
         this.ParqueaderoList = ParqueaderoList;
         this.TicketList = TicketList;
         this.TrabajadorList = TrabajadorList;
+
+        this.VehiculoList = VehiculoList;
+
         this.DuenioList = DuenioList;
         this.datosDireccion = datosDireccion;
         this.datosParqueadero = datosParqueadero;
+
     }
 
     public File getDatosDireccion() {
@@ -98,6 +111,16 @@ public class GestionDato {
         this.TrabajadorList = TrabajadorList;
     }
 
+
+    public List<Vehiculo> getVehiculoList() {
+        return VehiculoList;
+    }
+
+    public void setVehiculoList(List<Vehiculo> VehiculoList) {
+        this.VehiculoList = VehiculoList;
+    }
+    
+
     public List<Persona> getDuenioList() {
         return DuenioList;
     }
@@ -105,6 +128,7 @@ public class GestionDato {
     public void setDuenioList(List<Persona> DuenioList) {
         this.DuenioList = DuenioList;
     }
+
 
     
      public boolean addDireccion(Direccion direccion) {
@@ -124,6 +148,10 @@ public class GestionDato {
       public boolean addTrabajador(Trabajador  trabajador) {
         
 	return this.TrabajadorList.add(trabajador);
+    }
+        public boolean addVehiculo(Vehiculo vehiculo) {
+        
+	return this.VehiculoList.add(vehiculo);
     }
     
        public boolean addPersona(Persona  duenio) {
@@ -261,6 +289,40 @@ public class GestionDato {
             return null;
         }
     }
+   
+     public Vehiculo buscarVehiculo(String x) {
+		Vehiculo retorno= null;
+		for(Vehiculo v: this.VehiculoList)
+		{
+			if(v.getDuenio().getNombre()==x) {
+				retorno=v;
+			}
+		}
+		return retorno;
+	}
+   
+    public Object[] cargarComboParqueadero(){
+        Object[] retorno = new Object[this.getParqueaderoList().size()];
+        int i=0;
+        for(Parqueadero l:this.getParqueaderoList()){
+            retorno[i]=l.getClass();
+            i++;
+        }
+        return retorno;
+    }
+    
+    
+     public Object[] cargarComboVehiculo(){
+        Object[] retorno = new Object[this.getVehiculoList().size()];
+        int i=0;
+        for(Vehiculo l:this.getVehiculoList()){
+            retorno[i]=l.getClass();
+            i++;
+        }
+        return retorno;
+    }
+     
+     
    
    
 }

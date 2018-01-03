@@ -77,9 +77,6 @@ public class EventoDireccion implements ActionListener{
               
          }
         
-        
-       
-         
          
           if (ae.getSource().equals(this.ventanaDireccion.getBotonList().get(1))){
             this.ventanaDireccion.getTxtList().get(0).setText("");

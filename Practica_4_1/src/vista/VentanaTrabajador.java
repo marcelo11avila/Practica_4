@@ -5,6 +5,7 @@
  */
 package vista;
 
+import controlador.EventoTrabajador;
 import controlador.GestionDato;
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
@@ -58,7 +59,6 @@ public class VentanaTrabajador extends JFrame{
         this.etiList.add(new JLabel("Nombre"));
         this.etiList.add(new JLabel("Apellido"));
         this.etiList.add(new JLabel("Cedula"));
-        this.etiList.add(new JLabel("Horario"));
         this.etiList.add(new JLabel("Parqueadero"));
         
         this.txtList=new ArrayList<JTextField>();
@@ -66,7 +66,7 @@ public class VentanaTrabajador extends JFrame{
         this.txtList.add(new JTextField());
         this.txtList.add(new JTextField());
         this.txtList.add(new JTextField());
-        this.txtList.add(new JTextField());
+        
         
         
         this.boton1=new JButton("Guardar");
@@ -77,18 +77,17 @@ public class VentanaTrabajador extends JFrame{
         
         LayoutManager disenioPrincipal=new BorderLayout();
         this.panelPrincipal=new JPanel(disenioPrincipal);
-        LayoutManager disenioSup = new GridLayout(6,2);
+        LayoutManager disenioSup = new GridLayout(7,2);
         JPanel panelSup =new JPanel(disenioSup);
         
-        this.encabezado=new Object[5];
+        this.encabezado=new Object[4];
         this.encabezado[0]="Nombre";
         this.encabezado[1]="Apellido";
         this.encabezado[2]="Cedula";
-        this.encabezado[3]="Horario";
-        this.encabezado[4]="Parqueadero";
+        this.encabezado[3]="Parqueadero";
         
          
-        this.datos = this.cargaDatosTabla(this.gD.getTrabajadorList().size(),3);
+        this.datos = this.cargaDatosTabla(this.gD.getTrabajadorList().size(),4);
         this.modeloTabla = new DefaultTableModel(this.datos,this.encabezado);
         this.tabla = new JTable(modeloTabla);
         this.scroll = new JScrollPane(tabla);
@@ -107,8 +106,6 @@ public class VentanaTrabajador extends JFrame{
         panelSup.add(this.etiList.get(3));
         panelSup.add(this.combo);
         
-        panelSup.add(this.etiList.get(4));
-        panelSup.add(this.combo);
         
         panelSup.add(this.boton1);
         panelSup.add(this.boton2);
@@ -117,8 +114,8 @@ public class VentanaTrabajador extends JFrame{
         this.panelPrincipal.add(this.scroll,BorderLayout.CENTER);
         
         
-        //this.boton1.addActionListener(new EventoVentanaCapitulo(this));
-        //this.boton2.addActionListener(new EventoVentanaCapitulo(this));
+        this.boton1.addActionListener(new EventoTrabajador(this));
+        this.boton2.addActionListener(new EventoTrabajador(this));
         
        
         this.add(this.panelPrincipal); 
