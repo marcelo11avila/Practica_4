@@ -19,7 +19,7 @@ public class EventoDireccion implements ActionListener{
     private  VentanaDireccion ventanaDireccion;
     private GestionDato gD;
 
-    public EventoDireccion(VentanaDireccion ventanaDireccion, GestionDato gD) {
+    public EventoDireccion(GestionDato gD, VentanaDireccion ventanaDireccion ) {
         this.ventanaDireccion = ventanaDireccion;
         this.gD = gD;
     }
@@ -48,10 +48,10 @@ public class EventoDireccion implements ActionListener{
             String ciu=this.ventanaDireccion.getTxtList().get(0).getText();
             String calleP=this.ventanaDireccion.getTxtList().get(1).getText();
             String calleS=this.ventanaDireccion.getTxtList().get(2).getText();
-            
+            int cod=Integer.parseInt(this.ventanaDireccion.getTxtList().get(0).getText());
            
  
-            Direccion direccion = new Direccion(ciu,calleP,calleS);
+            Direccion direccion = new Direccion(cod,ciu,calleP,calleS);
                  
             if(ciu.length()==0){
                throw new NullPointerException(); 
@@ -64,8 +64,9 @@ public class EventoDireccion implements ActionListener{
             }
  
             this.ventanaDireccion.getGestionDato().addDireccion(direccion);
-           
-            Object[][] datoDireccion=this.ventanaDireccion.cargaDatosTabla(this.ventanaDireccion.getGestionDato().getDireccionList().size(),3);
+            this.gD.persistirDireccionList(this.gD.getDireccionList());
+            this.gD.LeerDireccionList();
+            Object[][] datoDireccion=this.ventanaDireccion.cargaDatosTabla(this.ventanaDireccion.getGestionDato().getDireccionList().size(),4);
             this.ventanaDireccion.setDatos(datoDireccion);
             this.ventanaDireccion.getModeloTabla().setDataVector(this.ventanaDireccion.getDatos(), this.ventanaDireccion.getEncabezado());
             

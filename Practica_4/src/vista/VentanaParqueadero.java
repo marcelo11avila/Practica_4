@@ -5,6 +5,7 @@
  */
 package vista;
 
+import controlador.EventoParqueadero;
 import controlador.GestionDato;
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
@@ -21,6 +22,9 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
+import modelo.Direccion;
+import modelo.Parqueadero;
+import modelo.Persona;
 
 /**
  *
@@ -54,10 +58,10 @@ public class VentanaParqueadero extends JFrame{
         
     }
     public void iniciaComponentes(){
-        LayoutManager disenioFondo=new GridLayout();
-        LayoutManager disenioCentro=new GridLayout();
-        LayoutManager disenioBotInf=new FlowLayout();
-        LayoutManager disenioBotSup=new GridLayout(); 
+        LayoutManager disenioFondo=new GridLayout(2,1);
+        LayoutManager disenioCentro=new GridLayout(5,2);
+        LayoutManager disenioBotSup=new FlowLayout(2);
+        LayoutManager disenioBotInf=new GridLayout(1,3); 
         
         this.panelBotonesInferior=new JPanel(disenioBotInf);
         this.panelBotonDuenio=new JPanel(disenioBotSup);
@@ -71,16 +75,19 @@ public class VentanaParqueadero extends JFrame{
         this.etiquetaList.add(new JLabel("Direccion: "));
         this.etiquetaList.add(new JLabel("Capacidad: "));
         this.etiquetaList.add(new JLabel("Dueño: "));
+        this.etiquetaList.add(new JLabel("codigo: "));
         
         this.txtList=new ArrayList<JTextField>();
         this.txtList.add(new JTextField());
         this.txtList.add(new JTextField());
+        this.txtList.add(new JTextField());
         
-        this.encabezado= new Object[4];               
-        this.encabezado[0]="Nombre";
-        this.encabezado[1]="Direccion";
-        this.encabezado[2]="Capacidad";
-        this.encabezado[3]="Dueño";
+        this.encabezado= new Object[4]; 
+        this.encabezado[0]="Codigo";
+        this.encabezado[1]="Nombre";
+        this.encabezado[2]="Direccion";
+        this.encabezado[3]="Capacidad";
+        //this.encabezado[4]="Dueño";
         
         this.botonList=new ArrayList<JButton>();
         this.botonList.add(new JButton("Guardar"));
@@ -88,7 +95,10 @@ public class VentanaParqueadero extends JFrame{
         this.botonList.add(new JButton("Add Dueño"));
         this.botonList.add(new JButton("Actualizar"));
         
-        //this.datos=cargaDatosTabla(this.gestionDato.getUniversidadList.size(),4);
+        this.comboDuenio=new JComboBox(this.cargaComboDuenio());
+        this.comboDireccion=new JComboBox(this.cargaComboDireccion());
+        
+        this.datos=cargaDatosTabla(this.gestionDato.getParqueaderoList().size(),4);
          
         this.modeloTabla= new DefaultTableModel(this.datos,this.encabezado);
         this.tabla =new JTable(this.modeloTabla);
@@ -96,6 +106,8 @@ public class VentanaParqueadero extends JFrame{
        
         this.panelVista.add(this.scroll, BorderLayout.CENTER);
         
+        this.panelCentro.add(this.etiquetaList.get(4));
+        this.panelCentro.add(this.txtList.get(2));
         this.panelCentro.add(this.etiquetaList.get(0));
         this.panelCentro.add(this.txtList.get(0));
         this.panelCentro.add(this.etiquetaList.get(1));
@@ -109,11 +121,11 @@ public class VentanaParqueadero extends JFrame{
         this.panelBotonesInferior.add(this.botonList.get(1));
         this.panelBotonesInferior.add(this.botonList.get(3));
         
-        /*this.botonList.get(0).addActionListener(new EventoVentanaUniversidad(gestionDato,this));
-        this.botonList.get(1).addActionListener(new EventoVentanaUniversidad(gestionDato,this));
-        this.botonList.get(2).addActionListener(new EventoVentanaUniversidad(gestionDato,this));
-        this.botonList.get(3).addActionListener(new EventoVentanaUniversidad(gestionDato,this));
-        */
+        this.botonList.get(0).addActionListener(new EventoParqueadero(gestionDato,this));
+        this.botonList.get(1).addActionListener(new EventoParqueadero(gestionDato,this));
+        this.botonList.get(2).addActionListener(new EventoParqueadero(gestionDato,this));
+        this.botonList.get(3).addActionListener(new EventoParqueadero(gestionDato,this));
+        
         
         this.panelBotonDuenio.add(this.botonList.get(2));
         this.panelSup.add(this.panelBotonDuenio,BorderLayout.NORTH);
@@ -128,6 +140,54 @@ public class VentanaParqueadero extends JFrame{
         
         
      }
+     public Object[][] cargaDatosTabla(int h, int w)
+    {
+        Object[][] retorno= new Object[h][w];
+        int i=0;
+        
+        for(Parqueadero p:this.gestionDato.getParqueaderoList())
+        {
+            retorno[i][0]=p.getCod();
+            retorno[i][1]=p.getNombre();
+            retorno[i][2]=p.getDireccion().getCod();
+            retorno[i][3]=p.getCapacidad();
+            //retorno[i][4]=p.getDuenio().getNombre();
+            i++;
+        }        
+        return retorno;
+    }
+    public Object[] cargaComboDuenio()
+    {
+        
+        Object [] combo=new Object[this.getGestionDato().getDuenioList().size()];
+        int i =0;
+        for(Persona due: this.gestionDato.getDuenioList())
+        {
+            combo[i]=(due.getNombre());
+            
+            i++;
+        }
+       return combo;
+    }
+    public Object[] cargaComboDireccion()
+    {
+        
+        Object [] combo=new Object[this.gestionDato.getDireccionList().size()];
+        int i =0;
+        for(Direccion d: this.gestionDato.getDireccionList())
+        {
+            combo[i]=(d.getCiudad());
+            
+            i++;
+        }
+       return combo;
+    }
+    
+     public void addcombo(){
+          for(Persona due: this.gestionDato.getDuenioList()){
+          this.comboDuenio.addItem(due.getNombre());
+          }
+      }
 
     public JPanel getPanel() {
         return panel;

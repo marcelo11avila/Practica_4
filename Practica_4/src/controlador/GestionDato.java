@@ -5,9 +5,19 @@
  */
 package controlador;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.DataOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import modelo.Direccion;
 import modelo.Parqueadero;
+import modelo.Persona;
 import modelo.Ticket;
 import modelo.Trabajador;
 
@@ -20,13 +30,41 @@ public class GestionDato {
     private List<Parqueadero> ParqueaderoList;
     private List<Ticket>TicketList;
     private List<Trabajador>TrabajadorList;
+    private List<Persona> DuenioList;
+    private File datosDireccion;
+    private File datosParqueadero;
 
-    public GestionDato(List<Direccion> DireccionList, List<Parqueadero> ParqueaderoList, List<Ticket> TicketList, List<Trabajador> TrabajadorList) {
+    public GestionDato(List<Direccion> DireccionList, List<Parqueadero> ParqueaderoList, List<Ticket> TicketList, List<Trabajador> TrabajadorList, List<Persona> DuenioList, File datosDireccion, File datosParqueadero) {
         this.DireccionList = DireccionList;
         this.ParqueaderoList = ParqueaderoList;
         this.TicketList = TicketList;
         this.TrabajadorList = TrabajadorList;
+        this.DuenioList = DuenioList;
+        this.datosDireccion = datosDireccion;
+        this.datosParqueadero = datosParqueadero;
     }
+
+    public File getDatosDireccion() {
+        return datosDireccion;
+    }
+
+    public void setDatosDireccion(File datosDireccion) {
+        this.datosDireccion = datosDireccion;
+    }
+
+    
+
+    public File getDatosParqueadero() {
+        return datosParqueadero;
+    }
+
+    public void setDatosParqueadero(File datosParqueadero) {
+        this.datosParqueadero = datosParqueadero;
+    }
+
+    
+
+    
 
     public List<Direccion> getDireccionList() {
         return DireccionList;
@@ -60,6 +98,14 @@ public class GestionDato {
         this.TrabajadorList = TrabajadorList;
     }
 
+    public List<Persona> getDuenioList() {
+        return DuenioList;
+    }
+
+    public void setDuenioList(List<Persona> DuenioList) {
+        this.DuenioList = DuenioList;
+    }
+
     
      public boolean addDireccion(Direccion direccion) {
         
@@ -80,7 +126,13 @@ public class GestionDato {
 	return this.TrabajadorList.add(trabajador);
     }
     
+       public boolean addPersona(Persona  duenio) {
+        
+	return this.DuenioList.add(duenio);
+    }
     
+       
+       
     public Direccion buscarDireccion(String x) {
 		Direccion retorno= null;
 		for(Direccion d: this.DireccionList)
@@ -102,6 +154,113 @@ public class GestionDato {
 		}
 		return retorno;
 	}
+    public Persona buscarDuenio(String x) {
+		Persona retorno= null;
+		for(Persona due: this.DuenioList)
+		{
+			if(due.getCedula()==x) {
+				retorno=due;
+			}
+		}
+		return retorno;
+	}
+    
+     
+    public boolean persistirParqueaderoList(List<Parqueadero> lista){
+        try{
+            FileWriter ae = new FileWriter(datosParqueadero.getAbsolutePath(),true);
+            BufferedWriter escritura = new BufferedWriter(ae);
+            for(Parqueadero p:lista ){
+            escritura.append(p.toString());
+            escritura.newLine();
+        }
+           
+            escritura.close();
+           return true;     
+        }
+        catch(IOException e){
+            return false;
+        }
+    }
+    
+    public boolean persistirDireccionList(List<Direccion> lista){
+        try{
+            FileWriter ae = new FileWriter(datosDireccion.getAbsolutePath(),true);
+            BufferedWriter escritura = new BufferedWriter(ae);
+            for(Direccion d:lista ){
+            escritura.append(d.toString());
+            escritura.newLine();
+        }
+           
+            escritura.close();
+           return true;     
+        }
+        catch(IOException e){
+            return false;
+        }
+    }
+    
+    
+     public Parqueadero dividido(String linea){
+        String[] lineaArray= linea.split(" / ");
+        Parqueadero p = new Parqueadero(Integer.parseInt(lineaArray[1]),lineaArray[2],this.buscarDireccion(lineaArray[2]), Integer.parseInt(lineaArray[2]),this.buscarDuenio(lineaArray[1]));
+        return p;
+    }
+     public List<Parqueadero> LeerParqueaderoList(){
+        try{
+            List<Parqueadero> p= new ArrayList<Parqueadero>();
+            FileReader ae = new FileReader(datosParqueadero.getAbsolutePath());
+            BufferedReader lectura = new BufferedReader(ae); 
+            String linea;
+            
+            
+            while((linea=lectura.readLine())!=null){
+                
+                p.add(this.dividido(linea));
+   
+            }
+             
+            lectura.close();
+                
+            return p;
+            
+                
+        }
+        catch(IOException e){
+            return null;
+        }
+    }
+     
+    public Direccion dividido2(String linea){
+        String[] lineaArray= linea.split(" / ");
+        System.out.println(lineaArray[0]);
+        Direccion d = new Direccion(Integer.parseInt(lineaArray[0]),lineaArray[1],lineaArray[2],lineaArray[3]);
+        return d;
+    }
+     public List<Direccion> LeerDireccionList(){
+        try{
+            List<Direccion> d= new ArrayList<Direccion>();
+            FileReader ae = new FileReader(datosDireccion.getAbsolutePath());
+            BufferedReader lectura = new BufferedReader(ae); 
+            String linea;
+            
+            
+            while((linea=lectura.readLine())!=null){
+                
+                d.add(this.dividido2(linea));
+   
+            }
+             
+            lectura.close();
+                
+            return d;
+            
+                
+        }
+        catch(IOException e){
+            return null;
+        }
+    }
    
    
 }

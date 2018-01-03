@@ -7,6 +7,9 @@ package controlador;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import javax.swing.JOptionPane;
+import modelo.Parqueadero;
+import vista.VentanaDuenio;
 import vista.VentanaParqueadero;
 
 /**
@@ -17,7 +20,7 @@ public class EventoParqueadero implements ActionListener{
     private VentanaParqueadero ventanaParqueadero;
     private GestionDato gD;
 
-    public EventoParqueadero(VentanaParqueadero ventanaParqueadero, GestionDato gD) {
+    public EventoParqueadero( GestionDato gD , VentanaParqueadero ventanaParqueadero) {
         this.ventanaParqueadero = ventanaParqueadero;
         this.gD = gD;
     }
@@ -41,35 +44,48 @@ public class EventoParqueadero implements ActionListener{
     @Override
     public void actionPerformed(ActionEvent ae) {
          if(ae.getSource().equals(this.ventanaParqueadero.getBotonList().get(0))){
-            // try{
+             try{
+            int cod=Integer.parseInt(this.ventanaParqueadero.getTxtList().get(2).getText());
             String n=this.ventanaParqueadero.getTxtList().get(0).getText();
-            String d=this.ventanaParqueadero.getTxtList().get(1).getText();
-            int c= Integer.parseInt(this.ventanaParqueadero.getTxtList().get(2).getText());
-            String due=this.ventanaParqueadero.getTxtList().get(3).getText();
-           /*
- 
-            //Parqueadero parqueadero = new Parqueadero(ciu,calleP,calleS);
-                 
-            if(ciu.length()==0){
-               throw new NullPointerException(); 
-            }
-             if(calleP.length()==0){
-               throw new NullPointerException(); 
-            }
-              if(calleS.length()==0){
-               throw new NullPointerException(); 
-            }
- 
-            this.ventanaDireccion.getGestionDato().addDireccion(direccion);
+            String d=this.ventanaParqueadero.getComboDireccion().getSelectedItem().toString();
+            int c= Integer.parseInt(this.ventanaParqueadero.getTxtList().get(1).getText());
+            String due=this.ventanaParqueadero.getComboDuenio().getSelectedItem().toString();
            
-            Object[][] datoDireccion=this.ventanaDireccion.cargaDatosTabla(this.ventanaDireccion.getGestionDato().getDireccionList().size(),3);
-            this.ventanaDireccion.setDatos(datoDireccion);
-            this.ventanaDireccion.getModeloTabla().setDataVector(this.ventanaDireccion.getDatos(), this.ventanaDireccion.getEncabezado());
+ 
+            Parqueadero parqueadero = new Parqueadero(cod,n,this.ventanaParqueadero.getGestionDato().buscarDireccion(d),c,this.ventanaParqueadero.getGestionDato().buscarDuenio(due));
+              
+            boolean retorno=false;
+             for(Parqueadero p:this.getgD().getParqueaderoList()){
+               if(n.equals(p.getNombre())==true){
+                  retorno=true;
+                  break;
+                   }
+               }
+          
+           
+             if(retorno==true){
             
-             }        
-            catch(java.lang.NullPointerException npe){
-                JOptionPane.showMessageDialog(ventanaDireccion, "Ingrese los datos en todas las casillas", "Error", JOptionPane.ERROR_MESSAGE);
+                throw new TestException("no debe ser repetido");
+             }
+             else{
+            
+            this.gD.addParqueadero(parqueadero);
+            this.gD.persistirParqueaderoList(this.gD.getParqueaderoList());
+            this.gD.LeerParqueaderoList();
+                 
+             }
+ 
+           
+            Object[][] datoParqueadero=this.ventanaParqueadero.cargaDatosTabla(this.ventanaParqueadero.getGestionDato().getParqueaderoList().size(),4);
+            this.ventanaParqueadero.setDatos(datoParqueadero);
+            this.ventanaParqueadero.getModeloTabla().setDataVector(this.ventanaParqueadero.getDatos(), this.ventanaParqueadero.getEncabezado());
+            
+             }
+             catch(TestException te){
+                 JOptionPane.showMessageDialog(ventanaParqueadero, "No ingresar Universidades Repetidas", "Error", JOptionPane.ERROR_MESSAGE);
+
             }
+            
               
          }
         
@@ -77,20 +93,31 @@ public class EventoParqueadero implements ActionListener{
        
          
          
-          if (ae.getSource().equals(this.ventanaDireccion.getBotonList().get(1))){
-            this.ventanaDireccion.getTxtList().get(0).setText("");
-            this.ventanaDireccion.getTxtList().get(1).setText("");
-            this.ventanaDireccion.getTxtList().get(2).setText("");
-            this.ventanaDireccion.getTxtList().get(3).setText("");
-            this.ventanaDireccion.getTxtList().get(4).setText("");
+          if (ae.getSource().equals(this.ventanaParqueadero.getBotonList().get(1))){
+            this.ventanaParqueadero.getTxtList().get(0).setText("");
+            this.ventanaParqueadero.getTxtList().get(1).setText("");
+            this.ventanaParqueadero.getTxtList().get(2).setText("");
+            this.ventanaParqueadero.getTxtList().get(3).setText("");
+            this.ventanaParqueadero.getTxtList().get(4).setText("");
             
             
         }
-*/
+          
+        if (ae.getSource().equals(this.ventanaParqueadero.getBotonList().get(2))){
+           VentanaDuenio vd=new VentanaDuenio(this.ventanaParqueadero.getGestionDato());
+           vd.setVisible(true);  
+        }
+         
+         if (ae.getSource().equals(this.ventanaParqueadero.getBotonList().get(3))){
+             System.out.println("Actualiza");
+             
+             this.ventanaParqueadero.addcombo(); 
+        }
+
     }
     
     
     
     }
-} 
+ 
 

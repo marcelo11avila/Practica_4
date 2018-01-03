@@ -10,15 +10,27 @@ package modelo;
  * @author Estudiante
  */
 public class Direccion {
+    private int cod;
     private String ciudad;
     private String callePrin;
     private String calleSec;
 
-    public Direccion(String ciudad, String callePrin, String calleSec) {
+    public Direccion(int cod, String ciudad, String callePrin, String calleSec) {
+        this.cod = cod;
         this.ciudad = ciudad;
         this.callePrin = callePrin;
         this.calleSec = calleSec;
     }
+
+    public int getCod() {
+        return cod;
+    }
+
+    public void setCod(int cod) {
+        this.cod = cod;
+    }
+
+    
 
     public Direccion() {
     }
@@ -49,8 +61,10 @@ public class Direccion {
 
     @Override
     public String toString() {
-        return  ciudad + ", callePrin=" + callePrin + ", calleSec=" + calleSec;
+        return cod + " / " + ciudad + " / " + callePrin + " / " + calleSec;
     }
+
+   
     
     
     

@@ -10,18 +10,29 @@ package modelo;
  * @author Estudiante
  */
 public class Parqueadero {
-    
+    private int cod;
     private String nombre;
     private Direccion direccion;
     private int capacidad;
     private Persona duenio;
 
-    public Parqueadero(String nombre, Direccion direccion, int capacidad, Persona duenio) {
+    public Parqueadero(int cod, String nombre, Direccion direccion, int capacidad, Persona duenio) {
+        this.cod = cod;
         this.nombre = nombre;
         this.direccion = direccion;
         this.capacidad = capacidad;
         this.duenio = duenio;
     }
+
+    public int getCod() {
+        return cod;
+    }
+
+    public void setCod(int cod) {
+        this.cod = cod;
+    }
+
+    
 
     public Parqueadero() {
     }
@@ -60,8 +71,12 @@ public class Parqueadero {
 
     @Override
     public String toString() {
-        return  nombre + ", direccion=" + direccion + ", capacidad=" + capacidad + ", duenio=" + duenio.getNombre();
+        return cod + "/" + nombre + "/" + direccion + "/" + capacidad + "/" + duenio.getCedula();
     }
+
+    
+
+    
     
     
     
