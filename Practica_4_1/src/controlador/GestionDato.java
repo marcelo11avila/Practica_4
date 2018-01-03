@@ -31,31 +31,23 @@ public class GestionDato {
     private List<Parqueadero> ParqueaderoList;
     private List<Ticket>TicketList;
     private List<Trabajador>TrabajadorList;
-
-       private List<Vehiculo>VehiculoList;
-
     private List<Persona> DuenioList;
+    private List<Vehiculo> vehiculoList;
     private File datosDireccion;
     private File datosParqueadero;
 
-
-
-
-
-    public GestionDato(List<Direccion> DireccionList, List<Parqueadero> ParqueaderoList, List<Ticket> TicketList, List<Trabajador> TrabajadorList, List<Persona> DuenioList, File datosDireccion, File datosParqueadero) {
-
+        
+    public GestionDato(List<Vehiculo> VehiculoList,List<Direccion> DireccionList, List<Parqueadero> ParqueaderoList, List<Ticket> TicketList, List<Trabajador> TrabajadorList, List<Persona> DuenioList, File datosDireccion, File datosParqueadero) {
         this.DireccionList = DireccionList;
         this.ParqueaderoList = ParqueaderoList;
         this.TicketList = TicketList;
         this.TrabajadorList = TrabajadorList;
-
-        this.VehiculoList = VehiculoList;
-
         this.DuenioList = DuenioList;
+        this.vehiculoList = VehiculoList;
         this.datosDireccion = datosDireccion;
         this.datosParqueadero = datosParqueadero;
-
     }
+
 
     public File getDatosDireccion() {
         return datosDireccion;
@@ -73,6 +65,14 @@ public class GestionDato {
 
     public void setDatosParqueadero(File datosParqueadero) {
         this.datosParqueadero = datosParqueadero;
+    }
+
+    public List<Vehiculo> getVehiculoList() {
+        return vehiculoList;
+    }
+
+    public void setVehiculoList(List<Vehiculo> vehiculoList) {
+        this.vehiculoList = vehiculoList;
     }
 
     
@@ -111,16 +111,6 @@ public class GestionDato {
         this.TrabajadorList = TrabajadorList;
     }
 
-
-    public List<Vehiculo> getVehiculoList() {
-        return VehiculoList;
-    }
-
-    public void setVehiculoList(List<Vehiculo> VehiculoList) {
-        this.VehiculoList = VehiculoList;
-    }
-    
-
     public List<Persona> getDuenioList() {
         return DuenioList;
     }
@@ -129,11 +119,14 @@ public class GestionDato {
         this.DuenioList = DuenioList;
     }
 
-
     
      public boolean addDireccion(Direccion direccion) {
         
 	return this.DireccionList.add(direccion);
+    }
+      public boolean addVehiculo(Vehiculo vehiculo) {
+        
+	return this.vehiculoList.add(vehiculo);
     }
     public boolean addParqueadero(Parqueadero parqueadero) {
         
@@ -148,10 +141,6 @@ public class GestionDato {
       public boolean addTrabajador(Trabajador  trabajador) {
         
 	return this.TrabajadorList.add(trabajador);
-    }
-        public boolean addVehiculo(Vehiculo vehiculo) {
-        
-	return this.VehiculoList.add(vehiculo);
     }
     
        public boolean addPersona(Persona  duenio) {
@@ -289,17 +278,17 @@ public class GestionDato {
             return null;
         }
     }
+     
+    // public Object[] comboBoxRector() {
+	//	Object[] combo = new Object[this.getPersonaList().size()];
+	//	int i = 0;
+	//	for (Rector r : this.getRectorList()) {
+	//		combo[i] = r.getNombre() + " " + r.getApellido();
+	//		i++;
+	//	}
+	//	return combo;
+	//}
    
-     public Vehiculo buscarVehiculo(String x) {
-		Vehiculo retorno= null;
-		for(Vehiculo v: this.VehiculoList)
-		{
-			if(v.getDuenio().getNombre()==x) {
-				retorno=v;
-			}
-		}
-		return retorno;
-	}
    
     public Object[] cargarComboParqueadero(){
         Object[] retorno = new Object[this.getParqueaderoList().size()];

@@ -15,6 +15,7 @@ import modelo.Parqueadero;
 import modelo.Persona;
 import modelo.Ticket;
 import modelo.Trabajador;
+import modelo.Vehiculo;
 
 /**
  *
@@ -39,13 +40,13 @@ public class Principal {
         List<Parqueadero> p = new ArrayList<Parqueadero>();
         List<Ticket> ti = new ArrayList<Ticket>();
         List<Trabajador> t = new ArrayList<Trabajador>();
-        
+        List<Vehiculo> v = new ArrayList<Vehiculo>();
 
         List<Persona> due = new ArrayList<Persona>();
-        GestionDato gD = new GestionDato(d,p,ti,t,due,archivoParq,archivoDire);
+        GestionDato gD = new GestionDato(v, d, p, ti, t, due, archivo, archivoDire);
 
         VentanaPrincipal vP = new VentanaPrincipal(gD);
-
+        
     }
 
 }

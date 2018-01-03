@@ -1,14 +1,12 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package vista;
 
+
 import controlador.GestionDato;
+import modelo.Vehiculo;
+
 import java.awt.BorderLayout;
-import java.awt.FlowLayout;
 import java.awt.GridLayout;
+import java.awt.HeadlessException;
 import java.awt.LayoutManager;
 import java.util.ArrayList;
 import java.util.List;
@@ -22,258 +20,259 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
-/**
- *
- * @author Estudiante
- */
-public class VentanaVehiculo extends JFrame{
-    private JPanel panel;
-    private JPanel panelCentro;
-    private JPanel panelVista;
-    private JPanel panelFondo;
-    private JPanel panelSup;
-    private JPanel panelBotonDuenio;
-    private JPanel panelBotonesInferior;
-    private List<JLabel> etiquetaList;
-    private List<JButton> botonList;
-    private List<JTextField> txtList;
-    private JComboBox comboDireccion;
-    private JComboBox comboDuenio;
-    private GestionDato gestionDato;
-    private Object[][] datos;
-    private Object[] encabezado;
-    private DefaultTableModel modeloTabla;
-    private JTable tabla;
-    private JScrollPane scroll;
+public class VentanaVehiculo extends JFrame {
 
-    public VentanaVehiculo(GestionDato gestionDato) {
-        super("Registro Parqueadero");
-        this.gestionDato = gestionDato;
-        this.setSize(400, 300);
-        this.iniciaComponentes();
-        
-    }
-    public void iniciaComponentes(){
-        LayoutManager disenioFondo=new GridLayout();
-        LayoutManager disenioCentro=new GridLayout();
-        LayoutManager disenioBotInf=new FlowLayout();
-        LayoutManager disenioBotSup=new GridLayout(); 
-        
-        this.panelBotonesInferior=new JPanel(disenioBotInf);
-        this.panelBotonDuenio=new JPanel(disenioBotSup);
-        this.panelCentro=new JPanel(disenioCentro);
-        this.panelFondo= new JPanel(disenioFondo);
-        this.panelVista= new JPanel(new BorderLayout());
-        this.panelSup=   new JPanel(new BorderLayout());
-        
-        this.etiquetaList=new ArrayList<JLabel>();
-        this.etiquetaList.add(new JLabel("Nombre: "));
-        this.etiquetaList.add(new JLabel("Direccion: "));
-        this.etiquetaList.add(new JLabel("Capacidad: "));
-        this.etiquetaList.add(new JLabel("Dueño: "));
-        
-        this.txtList=new ArrayList<JTextField>();
-        this.txtList.add(new JTextField());
-        this.txtList.add(new JTextField());
-        
-        this.encabezado= new Object[4];               
-        this.encabezado[0]="Nombre";
-        this.encabezado[1]="Direccion";
-        this.encabezado[2]="Capacidad";
-        this.encabezado[3]="Dueño";
-        
-        this.botonList=new ArrayList<JButton>();
-        this.botonList.add(new JButton("Guardar"));
-        this.botonList.add(new JButton("Limpiar"));
-        this.botonList.add(new JButton("Add Dueño"));
-        this.botonList.add(new JButton("Actualizar"));
-        
-        //this.datos=cargaDatosTabla(this.gestionDato.getUniversidadList.size(),4);
-         
-        this.modeloTabla= new DefaultTableModel(this.datos,this.encabezado);
-        this.tabla =new JTable(this.modeloTabla);
-        this.scroll = new JScrollPane(this.tabla);
-       
-        this.panelVista.add(this.scroll, BorderLayout.CENTER);
-        
-        this.panelCentro.add(this.etiquetaList.get(0));
-        this.panelCentro.add(this.txtList.get(0));
-        this.panelCentro.add(this.etiquetaList.get(1));
-        this.panelCentro.add(comboDireccion);
-        this.panelCentro.add(this.etiquetaList.get(2));
-        this.panelCentro.add(this.txtList.get(1));
-        this.panelCentro.add(this.etiquetaList.get(3));
-        this.panelCentro.add(comboDuenio);
-        
-        this.panelBotonesInferior.add(this.botonList.get(0));
-        this.panelBotonesInferior.add(this.botonList.get(1));
-        this.panelBotonesInferior.add(this.botonList.get(3));
-        
-        /*this.botonList.get(0).addActionListener(new EventoVentanaUniversidad(gestionDato,this));
-        this.botonList.get(1).addActionListener(new EventoVentanaUniversidad(gestionDato,this));
-        this.botonList.get(2).addActionListener(new EventoVentanaUniversidad(gestionDato,this));
-        this.botonList.get(3).addActionListener(new EventoVentanaUniversidad(gestionDato,this));
-        */
-        
-        this.panelBotonDuenio.add(this.botonList.get(2));
-        this.panelSup.add(this.panelBotonDuenio,BorderLayout.NORTH);
-        this.panelSup.add(this.panelCentro,BorderLayout.CENTER);
-        this.panelSup.add(this.panelBotonesInferior,BorderLayout.SOUTH);
+	private List<JLabel> etiList;
+	private List<JTextField> txtList;
+	private JButton boton;
+	private JButton boton2;
+	private JButton boton3;
+	private JButton boton4;
+	private JPanel panelGuardar;
+	private JPanel panelInicial;
+	private JPanel panelVer;
+	private JPanel panelBotones;
+	private JPanel panel;
+	private GestionDato gestionDato;
+	private Object[][] datos;
+	private Object[] encabezado;
+	private DefaultTableModel modeloTabla;
+	private JTable tabla;
+	private JScrollPane scroll;
+	private JComboBox box;
 
-        this.panelFondo.add(this.panelSup);
-        this.panelFondo.add(this.panelVista);
-        
-        this.add(this.panelFondo);
-        
-        
-        
-     }
+	public VentanaVehiculo(GestionDato gD) throws HeadlessException {
+		super("Vehiculo");
+		this.gestionDato = gD;
+		this.setSize(500, 300);
+		this.iniciaComponente();
+		this.setVisible(true);
+	}
 
-    public JPanel getPanel() {
-        return panel;
-    }
+	public void iniciaComponente() {
+		this.etiList = new ArrayList<JLabel>();
+		this.etiList.add(new JLabel("Ingrese la marca:"));
+		this.etiList.add(new JLabel("Ingrese modelo:"));
+                this.etiList.add(new JLabel("Ingrese la placa:"));
+		this.etiList.add(new JLabel("Dueño:"));
 
-    public void setPanel(JPanel panel) {
-        this.panel = panel;
-    }
+		this.txtList = new ArrayList<JTextField>();
+		this.txtList.add(new JTextField(15));
+		this.txtList.add(new JTextField(15));
+                this.txtList.add(new JTextField(15));
 
-    public JPanel getPanelCentro() {
-        return panelCentro;
-    }
+		this.boton = new JButton("Guardar");
+		this.boton2 = new JButton("Limpiar");
+		this.boton3 = new JButton("Crear");
+		this.boton4 = new JButton("Actualizar");
 
-    public void setPanelCentro(JPanel panelCentro) {
-        this.panelCentro = panelCentro;
-    }
+		//this.boton.addActionListener(new EventoUniversidad(this.gestionDato, this));
+		//this.boton2.addActionListener(new EventoUniversidad(this.gestionDato, this));
+		//this.boton3.addActionListener(new EventoUniversidad(this.gestionDato, this));
+		//this.boton4.addActionListener(new EventoUniversidad(this.gestionDato, this));
 
-    public JPanel getPanelVista() {
-        return panelVista;
-    }
+		this.encabezado = new Object[4];
+		this.encabezado[0] = "Marca";
+		this.encabezado[1] = "Modelo";
+                this.encabezado[2] = "Placa";
+		this.encabezado[3] = "Dueño";
 
-    public void setPanelVista(JPanel panelVista) {
-        this.panelVista = panelVista;
-    }
+		this.datos = cargaDatosTabla(this.gestionDato.getVehiculoList().size(), 4);
 
-    public JPanel getPanelFondo() {
-        return panelFondo;
-    }
+		this.modeloTabla = new DefaultTableModel(this.datos, this.encabezado);
+		this.tabla = new JTable(this.modeloTabla);
+		this.scroll = new JScrollPane(this.tabla);
 
-    public void setPanelFondo(JPanel panelFondo) {
-        this.panelFondo = panelFondo;
-    }
+		this.box = new JComboBox();
 
-    public JPanel getPanelSup() {
-        return panelSup;
-    }
+		LayoutManager disenio = new GridLayout(5, 2);
+		LayoutManager disenio2 = new GridLayout(2, 1);
+		LayoutManager disenio3 = new GridLayout(1, 2);
+		this.panelVer = new JPanel(new BorderLayout());
+		this.panelGuardar = new JPanel(disenio);
+		this.panelInicial = new JPanel(disenio2);
+		this.panelBotones = new JPanel(disenio2);
+		this.panel = new JPanel(disenio3);
 
-    public void setPanelSup(JPanel panelSup) {
-        this.panelSup = panelSup;
-    }
+		this.panelBotones.add(this.boton3);
+		this.panelBotones.add(this.boton4);
 
-    public JPanel getPanelBotonDuenio() {
-        return panelBotonDuenio;
-    }
+		this.panel.add(this.box);
+		this.panel.add(this.panelBotones);
 
-    public void setPanelBotonDuenio(JPanel panelBotonDuenio) {
-        this.panelBotonDuenio = panelBotonDuenio;
-    }
+		this.panelGuardar.add(this.etiList.get(0));
+		this.panelGuardar.add(this.txtList.get(0));
+		this.panelGuardar.add(this.etiList.get(1));
+		this.panelGuardar.add(this.txtList.get(1));
+		this.panelGuardar.add(this.etiList.get(2));
+                this.panelGuardar.add(this.txtList.get(2));
+		this.panelGuardar.add(this.etiList.get(3));
+		this.panelGuardar.add(this.panel);
 
-    public JPanel getPanelBotonesInferior() {
-        return panelBotonesInferior;
-    }
+		this.panelVer.add(this.scroll, BorderLayout.CENTER);
+		this.panelGuardar.add(this.boton);
+		this.panelGuardar.add(this.boton2);
+		this.panelInicial.add(this.panelGuardar);
+		this.panelInicial.add(this.panelVer);
+		this.add(this.panelInicial);
 
-    public void setPanelBotonesInferior(JPanel panelBotonesInferior) {
-        this.panelBotonesInferior = panelBotonesInferior;
-    }
+	}
 
-    public List<JLabel> getEtiquetaList() {
-        return etiquetaList;
-    }
+	public Object[][] cargaDatosTabla(int h, int w) {
+		Object[][] retorno = new Object[h][w];
+		int i = 0;
+		for (Vehiculo v : this.gestionDato.getVehiculoList()) {
+			retorno[i][0] = v.getMarca();
+			retorno[i][1] = v.getModelo();
+			retorno[i][2] = v.getPlaca();
+                        retorno[i][3] = v.getDuenio().getNombre()+" "+v.getDuenio().getApellido();
+			i++;
+		}
+		return retorno;
+	}
 
-    public void setEtiquetaList(List<JLabel> etiquetaList) {
-        this.etiquetaList = etiquetaList;
-    }
+	public List<JLabel> getEtiList() {
+		return etiList;
+	}
 
-    public List<JButton> getBotonList() {
-        return botonList;
-    }
+	public void setEtiList(List<JLabel> etiList) {
+		this.etiList = etiList;
+	}
 
-    public void setBotonList(List<JButton> botonList) {
-        this.botonList = botonList;
-    }
+	public List<JTextField> getTxtList() {
+		return txtList;
+	}
 
-    public List<JTextField> getTxtList() {
-        return txtList;
-    }
+	public void setTxtList(List<JTextField> txtList) {
+		this.txtList = txtList;
+	}
 
-    public void setTxtList(List<JTextField> txtList) {
-        this.txtList = txtList;
-    }
+	public JButton getBoton() {
+		return boton;
+	}
 
-    public JComboBox getComboDireccion() {
-        return comboDireccion;
-    }
+	public void setBoton(JButton boton) {
+		this.boton = boton;
+	}
 
-    public void setComboDireccion(JComboBox comboDireccion) {
-        this.comboDireccion = comboDireccion;
-    }
+	public JButton getBoton2() {
+		return boton2;
+	}
 
-    public JComboBox getComboDuenio() {
-        return comboDuenio;
-    }
+	public void setBoton2(JButton boton2) {
+		this.boton2 = boton2;
+	}
 
-    public void setComboDuenio(JComboBox comboDuenio) {
-        this.comboDuenio = comboDuenio;
-    }
+	public JPanel getPanelInicial() {
+		return panelInicial;
+	}
 
-    public GestionDato getGestionDato() {
-        return gestionDato;
-    }
+	public void setPanelInicial(JPanel panelInicial) {
+		this.panelInicial = panelInicial;
+	}
 
-    public void setGestionDato(GestionDato gestionDato) {
-        this.gestionDato = gestionDato;
-    }
+	public GestionDato getGestionDato() {
+		return gestionDato;
+	}
 
-    public Object[][] getDatos() {
-        return datos;
-    }
+	public void setGestionDato(GestionDato gestionDato) {
+		this.gestionDato = gestionDato;
+	}
 
-    public void setDatos(Object[][] datos) {
-        this.datos = datos;
-    }
+	public JPanel getPanelGuardar() {
+		return panelGuardar;
+	}
 
-    public Object[] getEncabezado() {
-        return encabezado;
-    }
+	public void setPanelGuardar(JPanel panelGuardar) {
+		this.panelGuardar = panelGuardar;
+	}
 
-    public void setEncabezado(Object[] encabezado) {
-        this.encabezado = encabezado;
-    }
+	public JPanel getPanelVer() {
+		return panelVer;
+	}
 
-    public DefaultTableModel getModeloTabla() {
-        return modeloTabla;
-    }
+	public void setPanelVer(JPanel panelVer) {
+		this.panelVer = panelVer;
+	}
 
-    public void setModeloTabla(DefaultTableModel modeloTabla) {
-        this.modeloTabla = modeloTabla;
-    }
+	public Object[][] getDatos() {
+		return datos;
+	}
 
-    public JTable getTabla() {
-        return tabla;
-    }
+	public void setDatos(Object[][] datos) {
+		this.datos = datos;
+	}
 
-    public void setTabla(JTable tabla) {
-        this.tabla = tabla;
-    }
+	public Object[] getEncabezado() {
+		return encabezado;
+	}
 
-    public JScrollPane getScroll() {
-        return scroll;
-    }
+	public void setEncabezado(Object[] encabezado) {
+		this.encabezado = encabezado;
+	}
 
-    public void setScroll(JScrollPane scroll) {
-        this.scroll = scroll;
-    }
-    
-    
-    
-    
+	public DefaultTableModel getModeloTabla() {
+		return modeloTabla;
+	}
+
+	public void setModeloTabla(DefaultTableModel modeloTabla) {
+		this.modeloTabla = modeloTabla;
+	}
+
+	public JTable getTabla() {
+		return tabla;
+	}
+
+	public void setTabla(JTable tabla) {
+		this.tabla = tabla;
+	}
+
+	public JScrollPane getScroll() {
+		return scroll;
+	}
+
+	public void setScroll(JScrollPane scroll) {
+		this.scroll = scroll;
+	}
+
+	public JButton getBoton3() {
+		return boton3;
+	}
+
+	public void setBoton3(JButton boton3) {
+		this.boton3 = boton3;
+	}
+
+	public JButton getBoton4() {
+		return boton4;
+	}
+
+	public void setBoton4(JButton boton4) {
+		this.boton4 = boton4;
+	}
+
+	public JPanel getPanelBotones() {
+		return panelBotones;
+	}
+
+	public void setPanelBotones(JPanel panelBotones) {
+		this.panelBotones = panelBotones;
+	}
+
+	public JPanel getPanel() {
+		return panel;
+	}
+
+	public void setPanel(JPanel panel) {
+		this.panel = panel;
+	}
+
+	public JComboBox getBox() {
+		return box;
+	}
+
+	public void setBox(JComboBox box) {
+		this.box = box;
+	}
+
 }

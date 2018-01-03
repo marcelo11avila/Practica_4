@@ -64,19 +64,17 @@ public class VentanaTicket extends JFrame{
         
         this.txtList=new ArrayList<JTextField>();
         this.txtList.add(new JTextField());
-        this.txtList.add(new JTextField());
-        this.txtList.add(new JTextField());
-       
+        
         
         this.boton1=new JButton("Guardar");
         this.boton2=new JButton("Limpiar");
         
-         //this.combo = new JComboBox(this.cargarCombo());
-         //this.combo1 = new JComboBox(this.cargarCombo());
+        this.combo = new JComboBox(this.cargarCombo());
+        this.combo1 = new JComboBox(this.cargarCombo());
         
          LayoutManager disenioPrincipal = new BorderLayout();
         this.panelPrincipal = new JPanel(disenioPrincipal);
-        LayoutManager disenioSup = new GridLayout(6,2);
+        LayoutManager disenioSup = new GridLayout(4,2);
         JPanel panelSup = new JPanel(disenioSup);
         
         this.encabezado = new Object[3];
@@ -91,6 +89,8 @@ public class VentanaTicket extends JFrame{
         
         
        panelSup.add(this.etiList.get(0));
+       panelSup.add(this.txtList.get(0));
+       
        panelSup.add(this.etiList.get(1));
        
        panelSup.add(this.etiList.get(1));
