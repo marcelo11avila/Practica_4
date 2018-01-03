@@ -26,6 +26,7 @@ public class Principal {
         List<Parqueadero> p = new ArrayList<Parqueadero>();
         GestionDato gD = new GestionDato(d,p);
         VentanaPrincipal vP = new VentanaPrincipal(gD);
+        
     }
     
 }

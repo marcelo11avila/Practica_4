@@ -1,5 +1,6 @@
 package vista;
 
+import controlador.EventoVentanaInicial;
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
@@ -25,14 +26,13 @@ public class VentanaPrincipal extends JFrame {
     private JLabel etiqueta;
     private JButton boton;
     private GestionDato gD;
-    private List<JMenu> menuLista;
     private List<JMenuItem> itemMenuList;
     private JMenuBar barraMenu;
 
     public VentanaPrincipal(GestionDato g) {
         super("Gestion de Inscripcion");
         this.gD = g;
-        this.setSize(370, 400);
+        this.setSize(450, 400);
         this.iniciaComponente();
         this.setVisible(true);
         this.setDefaultCloseOperation(3);
@@ -40,26 +40,27 @@ public class VentanaPrincipal extends JFrame {
     }
 
     public void iniciaComponente() {
-        this.menuLista = new ArrayList<JMenu>();
-        
+    
+        this.itemMenuList = new ArrayList<JMenuItem>();
+
         ImageIcon img = new ImageIcon("AutoGif.gif");
+
+        this.itemMenuList.add(new JMenuItem("Direccion"));
+        this.itemMenuList.add(new JMenuItem("Parqueadero"));
+        this.itemMenuList.add(new JMenuItem("   Vehiculo"));
+        this.itemMenuList.add(new JMenuItem("Tickets"));
+        this.itemMenuList.add(new JMenuItem("Trabajador"));
+
+        this.barraMenu = new JMenuBar();
         
-        this.menuLista.add(new JMenu("Direccion |"));
-        this.menuLista.add(new JMenu("Parqueadero |"));
-        this.menuLista.add(new JMenu("Vehiculo |"));
-        this.menuLista.add(new JMenu("Tickets |"));
-        this.menuLista.add(new JMenu("Trabajador"));
-       
-        this.barraMenu= new JMenuBar();
         
-        for(int i = 0 ; i < 5; i++){
-            this.barraMenu.add(this.menuLista.get(i));
+        for (int i = 0; i < 5; i++) {
+            this.barraMenu.add(this.itemMenuList.get(i));
         }
-        
+
         this.setJMenuBar(this.barraMenu);
-        
+
         this.boton = new JButton(img);
-  
 
         LayoutManager disenioFinal = new BorderLayout();
         LayoutManager disenio = new FlowLayout();
@@ -68,14 +69,14 @@ public class VentanaPrincipal extends JFrame {
         this.panel = new JPanel(disenioFinal);
 
         this.panelVacio.add(this.boton);
-        
 
-        //for (int i = 0; i < 6; i++) {
-        //	this.botonList.get(i).addActionListener(new EventoPrincipal(this, this.gD));
-        //}
-        this.panel.add(this.panelVacio, BorderLayout.CENTER);
-        this.add(panel);
+        for (int i = 0; i < 5; i++) {
+            this.itemMenuList.get(i).addActionListener(new EventoVentanaInicial(this));
 
+            this.panel.add(this.panelVacio, BorderLayout.CENTER);
+            this.add(panel);
+
+        }
     }
 
     public JPanel getPanel() {
@@ -118,13 +119,6 @@ public class VentanaPrincipal extends JFrame {
         this.gD = gD;
     }
 
-    public List<JMenu> getMenuLista() {
-        return menuLista;
-    }
-
-    public void setMenuLista(List<JMenu> menuLista) {
-        this.menuLista = menuLista;
-    }
 
     public List<JMenuItem> getItemMenuList() {
         return itemMenuList;
