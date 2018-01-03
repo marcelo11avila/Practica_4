@@ -27,6 +27,7 @@ public class VentanaPrincipal extends JFrame {
     private JButton boton;
     private GestionDato gD;
     private List<JMenuItem> itemMenuList;
+     private List<JButton> botonList;
     private JMenuBar barraMenu;
 
     public VentanaPrincipal(GestionDato g) {
@@ -81,6 +82,7 @@ public class VentanaPrincipal extends JFrame {
 
     public JPanel getPanel() {
         return panel;
+        
     }
 
     public void setPanel(JPanel panel) {

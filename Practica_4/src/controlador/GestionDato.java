@@ -8,6 +8,8 @@ package controlador;
 import java.util.List;
 import modelo.Direccion;
 import modelo.Parqueadero;
+import modelo.Ticket;
+import modelo.Trabajador;
 
 /**
  *
@@ -16,10 +18,14 @@ import modelo.Parqueadero;
 public class GestionDato {
     private List<Direccion> DireccionList;
     private List<Parqueadero> ParqueaderoList;
+    private List<Ticket>TicketList;
+    private List<Trabajador>TrabajadorList;
 
-    public GestionDato(List<Direccion> DireccionList, List<Parqueadero> ParqueaderoList) {
+    public GestionDato(List<Direccion> DireccionList, List<Parqueadero> ParqueaderoList, List<Ticket> TicketList, List<Trabajador> TrabajadorList) {
         this.DireccionList = DireccionList;
         this.ParqueaderoList = ParqueaderoList;
+        this.TicketList = TicketList;
+        this.TrabajadorList = TrabajadorList;
     }
 
     public List<Direccion> getDireccionList() {
@@ -37,6 +43,23 @@ public class GestionDato {
     public void setParqueaderoList(List<Parqueadero> ParqueaderoList) {
         this.ParqueaderoList = ParqueaderoList;
     }
+
+    public List<Ticket> getTicketList() {
+        return TicketList;
+    }
+
+    public void setTicketList(List<Ticket> TicketList) {
+        this.TicketList = TicketList;
+    }
+
+    public List<Trabajador> getTrabajadorList() {
+        return TrabajadorList;
+    }
+
+    public void setTrabajadorList(List<Trabajador> TrabajadorList) {
+        this.TrabajadorList = TrabajadorList;
+    }
+
     
      public boolean addDireccion(Direccion direccion) {
         
@@ -45,6 +68,16 @@ public class GestionDato {
     public boolean addParqueadero(Parqueadero parqueadero) {
         
 	return this.ParqueaderoList.add(parqueadero);
+    }
+    
+     public boolean addTicket(Ticket ticket) {
+        
+	return this.TicketList.add(ticket);
+    }
+     
+      public boolean addTrabajador(Trabajador  trabajador) {
+        
+	return this.TrabajadorList.add(trabajador);
     }
     
     

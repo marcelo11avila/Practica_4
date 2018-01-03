@@ -10,6 +10,8 @@ import java.util.ArrayList;
 import java.util.List;
 import modelo.Direccion;
 import modelo.Parqueadero;
+import modelo.Ticket;
+import modelo.Trabajador;
 
 /**
  *
@@ -24,7 +26,9 @@ public class Principal {
         // TODO code application logic here
         List<Direccion> d = new ArrayList<Direccion>();
         List<Parqueadero> p = new ArrayList<Parqueadero>();
-        GestionDato gD = new GestionDato(d,p);
+        List<Ticket> ti = new ArrayList<Ticket>();
+        List<Trabajador> t = new ArrayList<Trabajador>();
+        GestionDato gD = new GestionDato(d,p,ti,t);
         VentanaPrincipal vP = new VentanaPrincipal(gD);
         
     }
