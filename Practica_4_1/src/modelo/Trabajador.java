@@ -5,12 +5,17 @@
  */
 package modelo;
 
+import java.io.Serializable;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
 /**
  *
  * @author Joel Vasquez
  */
-public class Trabajador  {
-    
+@Entity
+public class Trabajador  implements Serializable{
+    @Id
     private String nombre;
     private String apellido;
     private String cedula;

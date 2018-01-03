@@ -5,11 +5,17 @@
  */
 package modelo;
 
+import java.io.Serializable;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
 /**
  *
  * @author Estudiante
  */
-public class Vehiculo {
+@Entity
+public class Vehiculo implements Serializable{
+    @Id
      private String marca;
      private String modelo;
      private String placa;

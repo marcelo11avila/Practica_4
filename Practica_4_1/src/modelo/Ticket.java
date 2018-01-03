@@ -5,12 +5,17 @@
  */
 package modelo;
 
+import java.io.Serializable;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
 /**
  *
  * @author Joel Vasquez
  */
-public class Ticket {
-    
+@Entity
+public class Ticket implements Serializable{
+    @Id
     private int numTicket;
     private Parqueadero parqueadero;
     private Vehiculo vehiculo;

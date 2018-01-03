@@ -5,11 +5,17 @@
  */
 package modelo;
 
+import java.io.Serializable;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
 /**
  *
  * @author Estudiante
  */
-public class Direccion {
+@Entity
+public class Direccion implements Serializable{
+    @Id
     private int cod;
     private String ciudad;
     private String callePrin;
@@ -21,18 +27,17 @@ public class Direccion {
         this.callePrin = callePrin;
         this.calleSec = calleSec;
     }
-
+    
+    public Direccion(){
+        
+    }
+    
     public int getCod() {
         return cod;
     }
 
     public void setCod(int cod) {
         this.cod = cod;
-    }
-
-    
-
-    public Direccion() {
     }
 
     public String getCiudad() {

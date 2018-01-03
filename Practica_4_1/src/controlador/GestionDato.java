@@ -15,6 +15,9 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 import modelo.Direccion;
 import modelo.Parqueadero;
 import modelo.Persona;
@@ -35,7 +38,8 @@ public class GestionDato {
     private List<Vehiculo> vehiculoList;
     private File datosDireccion;
     private File datosParqueadero;
-
+    
+     private EntityManagerFactory emf = Persistence.createEntityManagerFactory("Practica_4PU");
         
     public GestionDato(List<Vehiculo> VehiculoList,List<Direccion> DireccionList, List<Parqueadero> ParqueaderoList, List<Ticket> TicketList, List<Trabajador> TrabajadorList, List<Persona> DuenioList, File datosDireccion, File datosParqueadero) {
         this.DireccionList = DireccionList;
@@ -313,5 +317,122 @@ public class GestionDato {
      
      
    
+     
+    public boolean persistirTelefono(Direccion d)
+    {
+        boolean retorno=false;
+        EntityManager em = this.emf.createEntityManager();
+        em.getTransaction().begin();
+        em.persist(d);
+        em.getTransaction().commit();
+        em.close();
+        retorno=true;
+        return retorno;
+    }
+
+    public boolean persistirPersona(Parqueadero p) {
+        boolean retorno=false;
+        EntityManager em = this.emf.createEntityManager();
+        em.getTransaction().begin();
+        em.persist(p);
+        em.getTransaction().commit();
+        em.close();
+        retorno=true;
+        return retorno;
+    }
+     
+    
+    public boolean persistirPersona(Persona per)
+    {
+        boolean retorno=false;
+        EntityManager em = this.emf.createEntityManager();
+        em.getTransaction().begin();
+        em.persist(per);
+        em.getTransaction().commit();
+        em.close();
+        retorno=true;
+        return retorno;
+    }
+
+    public boolean persistirTicket(Ticket t) {
+        boolean retorno=false;
+        EntityManager em = this.emf.createEntityManager();
+        em.getTransaction().begin();
+        em.persist(t);
+        em.getTransaction().commit();
+        em.close();
+        retorno=true;
+        return retorno;
+    }
+    
+    public boolean persistirTrabajador(Trabajador tra) {
+        boolean retorno=false;
+        EntityManager em = this.emf.createEntityManager();
+        em.getTransaction().begin();
+        em.persist(tra);
+        em.getTransaction().commit();
+        em.close();
+        retorno=true;
+        return retorno;
+    }
+    
+    public boolean persistirVehiculo(Vehiculo v) {
+        boolean retorno=false;
+        EntityManager em = this.emf.createEntityManager();
+        em.getTransaction().begin();
+        em.persist(v);
+        em.getTransaction().commit();
+        em.close();
+        retorno=true;
+        return retorno;
+    }
+    
+     public List<Direccion> leerDireccion() {
+        List<Direccion> retorno=null;        
+        EntityManager em = this.emf.createEntityManager();
+        retorno=em.createQuery("SELECT d FROM Direccion d ORDER BY d.id").getResultList();        
+        em.close();
+        return retorno;
+    }
+
+    public List<Parqueadero> leerParqueadero() {
+        List<Parqueadero> retorno=null;        
+        EntityManager em = this.emf.createEntityManager();
+        retorno=em.createQuery("SELECT p FROM Parqueadero p ORDER BY p.id").getResultList();        
+        em.close();
+        return retorno;
+    }
    
+    
+    public List<Persona> leerPersona() {
+        List<Persona> retorno=null;        
+        EntityManager em = this.emf.createEntityManager();
+        retorno=em.createQuery("SELECT per FROM Persona per ORDER BY per.id").getResultList();        
+        em.close();
+        return retorno;
+    }
+
+    public List<Ticket> leerTicket() {
+        List<Ticket> retorno=null;        
+        EntityManager em = this.emf.createEntityManager();
+        retorno=em.createQuery("SELECT t FROM Ticket t ORDER BY t.id").getResultList();        
+        em.close();
+        return retorno;
+    }
+    
+    public List<Trabajador> leerTrabajador() {
+        List<Trabajador> retorno=null;        
+        EntityManager em = this.emf.createEntityManager();
+        retorno=em.createQuery("SELECT tra FROM Trabajador tra ORDER BY tra.id").getResultList();        
+        em.close();
+        return retorno;
+    }
+
+    public List<Vehiculo> leerVehiculo() {
+        List<Vehiculo> retorno=null;        
+        EntityManager em = this.emf.createEntityManager();
+        retorno=em.createQuery("SELECT v FROM Vehiculo v ORDER BY v.id").getResultList();        
+        em.close();
+        return retorno;
+    }
 }

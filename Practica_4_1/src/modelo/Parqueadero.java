@@ -5,11 +5,17 @@
  */
 package modelo;
 
+import java.io.Serializable;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
 /**
  *
  * @author Estudiante
  */
-public class Parqueadero {
+@Entity
+public class Parqueadero implements Serializable{
+    @Id
     private int cod;
     private String nombre;
     private Direccion direccion;
@@ -23,18 +29,16 @@ public class Parqueadero {
         this.capacidad = capacidad;
         this.duenio = duenio;
     }
-
+    
+    public Parqueadero() {
+    }
+    
     public int getCod() {
         return cod;
     }
 
     public void setCod(int cod) {
         this.cod = cod;
-    }
-
-    
-
-    public Parqueadero() {
     }
 
     public String getNombre() {

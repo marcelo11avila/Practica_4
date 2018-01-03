@@ -5,11 +5,17 @@
  */
 package modelo;
 
+import java.io.Serializable;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
 /**
  *
  * @author Estudiante
  */
-public class Persona {
+@Entity
+public class Persona implements Serializable{
+    @Id
     private String nombre;
     private String apellido;
     private String cedula;
