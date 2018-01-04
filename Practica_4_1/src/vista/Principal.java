@@ -28,7 +28,7 @@ public class Principal {
      */
     public static void main(String[] args) throws IOException {
         // TODO code application logic here
-        
+        GestionDato gd = new GestionDato ();
         List<Direccion> d = new ArrayList<Direccion>();
         List<Parqueadero> p = new ArrayList<Parqueadero>();
         List<Ticket> ti = new ArrayList<Ticket>();

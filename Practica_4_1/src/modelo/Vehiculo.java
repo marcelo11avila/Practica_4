@@ -15,9 +15,10 @@ import javax.persistence.Id;
  */
 @Entity
 public class Vehiculo implements Serializable{
-    @Id
+    
      private String marca;
      private String modelo;
+    @Id
      private String placa;
      private Persona duenio;
 
