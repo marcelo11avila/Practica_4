@@ -125,11 +125,12 @@ public class VentanaTrabajador extends JFrame{
      public Object[][] cargaDatosTabla(int h, int w){
         Object[][] retorno= new Object[h][w];
         int i=0;
-        for(Ticket t:this.gD.getTicketList())
+        for(Trabajador tr:this.gD.getTrabajadorList())
         {
-            retorno[i][0]=t.getNumTicket();
-            retorno[i][1]=t.getParqueadero();
-            retorno[i][2]=t.getVehiculo();
+            retorno[i][0]=tr.getNombre();
+            retorno[i][1]=tr.getApellido();
+            retorno[i][2]=tr.getCedula();
+            retorno[i][3]=tr.getParqueadero().getNombre();
             
             i++;
         }        
@@ -141,7 +142,7 @@ public class VentanaTrabajador extends JFrame{
         Object[] retorno = new Object[this.gD.getParqueaderoList().size()];
         int i=0;
         for(Parqueadero l:this.gD.getParqueaderoList()){
-            retorno[i]=l.getClass();
+            retorno[i]=l.getNombre();
             i++;
         }
         return retorno;

@@ -7,7 +7,9 @@ package controlador;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import javax.swing.JOptionPane;
 import modelo.Direccion;
+import modelo.Parqueadero;
 import modelo.Trabajador;
 import vista.VentanaTrabajador;
 
@@ -44,35 +46,51 @@ public class EventoTrabajador implements ActionListener{
     
     @Override
     public void actionPerformed(ActionEvent ae) {
-        try{
+        if(ae.getSource().equals(this.ventanaTrabajador.getBoton1())){
+          
+            try{
+        
             String nombre=this.ventanaTrabajador.getTxtList().get(0).getText();
             String apellido=this.ventanaTrabajador.getTxtList().get(1).getText();
             String cedula=this.ventanaTrabajador.getTxtList().get(2).getText();
-            String parqueadero = this.ventanaTrabajador.getgD().cargarComboParqueadero().toString();
+            String parqueadero = this.ventanaTrabajador.getCombo().getSelectedItem().toString();
            
  
             Trabajador trabajador = new Trabajador(nombre, apellido, cedula, this.ventanaTrabajador.getgD().buscarParqueadero(parqueadero));
-                 
-            if(nombre.length()==0){
-               throw new NullPointerException(); 
-            }
-             if(apellido.length()==0){
-               throw new NullPointerException(); 
-            }
-              if(cedula.length()==0){
-               throw new NullPointerException(); 
-            }
- 
-            this.ventanaTrabajador.getgD().addTrabajador(trabajador);
            
-            Object[][] datoDireccion=this.ventanaTrabajador.cargaDatosTabla(this.ventanaTrabajador.getgD().getDireccionList().size(),4);
+            
+              boolean retorno=false;
+             for(Trabajador t:this.getgD().getTrabajadorList()){
+               if(cedula.equals(t.getCedula())==true){
+                  retorno=true;
+                  break;
+                   }
+               }
+             
+             if(retorno==true){
+            
+                throw new TestException("no debe ser repetido");
+                
+             }else{
+                 
+             
+            this.ventanaTrabajador.getgD().addTrabajador(trabajador);
+             }
+           
+            Object[][] datoDireccion=this.ventanaTrabajador.cargaDatosTabla(this.ventanaTrabajador.getgD().getTrabajadorList().size(),4);
             this.ventanaTrabajador.setDatos(datoDireccion);
             this.ventanaTrabajador.getModeloTabla().setDataVector(this.ventanaTrabajador.getDatos(), this.ventanaTrabajador.getEncabezado());
             
-        }catch(Exception ex){
-            
-        }
+         }
+             catch(TestException te){
+                     
+                 JOptionPane.showMessageDialog(ventanaTrabajador, "No ingresar Universidades Repetidas", "Error", JOptionPane.ERROR_MESSAGE);
+
+            }
+             catch(Exception e){
+                 
         
+        }
         if (ae.getSource().equals(this.ventanaTrabajador.getBoton2())){
             this.ventanaTrabajador.getTxtList().get(0).setText("");
             this.ventanaTrabajador.getTxtList().get(1).setText("");
@@ -80,7 +98,6 @@ public class EventoTrabajador implements ActionListener{
             this.ventanaTrabajador.getTxtList().get(3).setText("");
             
     }
-    
-    
 }
+   }
 }

@@ -31,13 +31,18 @@ import modelo.Vehiculo;
  * @author Estudiante
  */
 public class GestionDato {
+    
+    
     private EntityManagerFactory emf = Persistence.createEntityManagerFactory("Practica_4PU");
     private List<Direccion> DireccionList;
     private List<Parqueadero> ParqueaderoList;
-    private List<Ticket>TicketList;
-    private List<Trabajador>TrabajadorList;
+    private List<Ticket> TicketList;
+    private List<Trabajador> TrabajadorList;
     private List<Persona> DuenioList;
     private List<Vehiculo> vehiculoList;
+
+    public GestionDato() {
+    }
     
         
     public GestionDato(List<Vehiculo> VehiculoList,List<Direccion> DireccionList, List<Parqueadero> ParqueaderoList, List<Ticket> TicketList, List<Trabajador> TrabajadorList, List<Persona> DuenioList) {
@@ -131,7 +136,16 @@ public class GestionDato {
 	return this.DuenioList.add(duenio);
     }
     
-       
+    public Vehiculo buscarVehiculo(String x) {
+		Vehiculo retorno= null;
+		for(Vehiculo v: this.vehiculoList)
+		{
+			if(v.getPlaca()==x) {
+				retorno=v;
+			}
+		}
+		return retorno;
+	} 
        
     public Direccion buscarDireccion(String x) {
 		Direccion retorno= null;
@@ -315,7 +329,7 @@ public class GestionDato {
     public List<Ticket> leerTicket() {
         List<Ticket> retorno=null;        
         EntityManager em = this.emf.createEntityManager();
-        retorno=em.createQuery("SELECT t FROM Ticket t ORDER BY t.id").getResultList();        
+        retorno=em.createQuery("SELECT t FROM Ticket t ORDER BY t.numTicket").getResultList();        
         em.close();
         return retorno;
     }
@@ -323,7 +337,7 @@ public class GestionDato {
     public List<Trabajador> leerTrabajador() {
         List<Trabajador> retorno=null;        
         EntityManager em = this.emf.createEntityManager();
-        retorno=em.createQuery("SELECT tra FROM Trabajador tra ORDER BY tra.id").getResultList();        
+        retorno=em.createQuery("SELECT tra FROM Trabajador tra ORDER BY tra.cedula").getResultList();        
         em.close();
         return retorno;
     }
@@ -331,7 +345,7 @@ public class GestionDato {
     public List<Vehiculo> leerVehiculo() {
         List<Vehiculo> retorno=null;        
         EntityManager em = this.emf.createEntityManager();
-        retorno=em.createQuery("SELECT v FROM Vehiculo v ORDER BY v.id").getResultList();        
+        retorno=em.createQuery("SELECT v FROM Vehiculo v ORDER BY v.placa").getResultList();        
         em.close();
         return retorno;
     }

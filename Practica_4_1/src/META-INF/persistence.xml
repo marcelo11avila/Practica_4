@@ -3,11 +3,11 @@
   <persistence-unit name="Practica_4PU" transaction-type="RESOURCE_LOCAL">
     <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
     <class>modelo.Direccion</class>
-    <class>modelo.Parqueadero</class>
     <class>modelo.Persona</class>
     <class>modelo.Ticket</class>
     <class>modelo.Trabajador</class>
     <class>modelo.Vehiculo</class>
+    <class>modelo.Parqueadero</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:derby://localhost:1527/sample"/>
       <property name="javax.persistence.jdbc.user" value="app"/>

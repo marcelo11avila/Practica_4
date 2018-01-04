@@ -44,6 +44,7 @@ public class EventoParqueadero implements ActionListener{
     @Override
     public void actionPerformed(ActionEvent ae) {
          if(ae.getSource().equals(this.ventanaParqueadero.getBotonList().get(0))){
+             
              try{
             int cod=Integer.parseInt(this.ventanaParqueadero.getTxtList().get(2).getText());
             String n=this.ventanaParqueadero.getTxtList().get(0).getText();
@@ -85,9 +86,7 @@ public class EventoParqueadero implements ActionListener{
                  JOptionPane.showMessageDialog(ventanaParqueadero, "No ingresar Universidades Repetidas", "Error", JOptionPane.ERROR_MESSAGE);
 
             }
-             catch(Exception e){
-                 JOptionPane.showMessageDialog(ventanaParqueadero, "ERROR GRANDE", "Error", JOptionPane.ERROR_MESSAGE);
-             }
+            
             
               
          }

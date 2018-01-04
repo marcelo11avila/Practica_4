@@ -46,12 +46,12 @@ public class EventoTicket implements ActionListener{
     public void actionPerformed(ActionEvent ae) {
           if(ae.getSource().equals(this.ventanaTicket.getBoton1())){
            
-          String n= this.ventanaTicket.getTxtList().get(0).getText();
+          int n= Integer.parseInt(this.ventanaTicket.getTxtList().get(0).getText());
           String c= this.ventanaTicket.getCombo().getSelectedItem().toString();   
           String c1= this.ventanaTicket.getCombo1().getSelectedItem().toString(); 
           
-           // Ticket ti = new Ticket(n, this.ventanaTicket.getgD().buscarParqueadero(c1));
-           //this.gestionDato.addTicket(ti);
+           Ticket ti = new Ticket(n, this.ventanaTicket.getgD().buscarParqueadero(c1),this.gestionDato.buscarVehiculo(c));
+           this.gestionDato.addTicket(ti);
             
             Object[][] datoTicket = this.ventanaTicket.cargaDatosTabla(this.ventanaTicket.getgD().getTicketList().size(),3);
             this.ventanaTicket.setDatos(datoTicket);

@@ -5,6 +5,7 @@
  */
 package vista;
 
+import controlador.EventoTicket;
 import controlador.GestionDato;
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
@@ -22,6 +23,7 @@ import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 import modelo.Parqueadero;
 import modelo.Ticket;
+import modelo.Vehiculo;
 
 /**
  *
@@ -70,7 +72,7 @@ public class VentanaTicket extends JFrame{
         this.boton2=new JButton("Limpiar");
         
         this.combo = new JComboBox(this.cargarCombo());
-        this.combo1 = new JComboBox(this.cargarCombo());
+        this.combo1 = new JComboBox(this.cargarCombo1());
         
          LayoutManager disenioPrincipal = new BorderLayout();
         this.panelPrincipal = new JPanel(disenioPrincipal);
@@ -106,8 +108,8 @@ public class VentanaTicket extends JFrame{
         this.panelPrincipal.add(this.scroll,BorderLayout.CENTER);
         
         
-        //this.boton1.addActionListener(new EventoVentanaCapitulo(this));
-       // this.boton2.addActionListener(new EventoVentanaCapitulo(this));
+       this.boton1.addActionListener(new EventoTicket(this,gD));
+       this.boton2.addActionListener(new EventoTicket(this,gD));
        
     
         this.add(this.panelPrincipal);
@@ -120,8 +122,8 @@ public class VentanaTicket extends JFrame{
         for(Ticket t:this.gD.getTicketList())
         {
             retorno[i][0]=t.getNumTicket();
-            retorno[i][1]=t.getParqueadero();
-            retorno[i][2]=t.getVehiculo();
+            retorno[i][1]=t.getParqueadero().getNombre();
+            retorno[i][2]=t.getVehiculo().getPlaca();
             
             i++;
         }        
@@ -133,23 +135,23 @@ public class VentanaTicket extends JFrame{
         Object[] retorno = new Object[this.gD.getParqueaderoList().size()];
         int i=0;
         for(Parqueadero l:this.gD.getParqueaderoList()){
-            retorno[i]=l.getClass();
+            retorno[i]=l.getNombre();
             i++;
         }
         return retorno;
     }
     
-    /*
+    
      public Object[] cargarCombo1(){
         Object[] retorno = new Object[this.gD.getVehiculoList().size()];
         int i=0;
         for(Vehiculo l:this.gD.getVehiculoList()){
-            retorno[i]=l.getClass();
+            retorno[i]=l.getPlaca();
             i++;
         }
         return retorno;
     }
-*/
+
 
     public List<JLabel> getEtiList() {
         return etiList;

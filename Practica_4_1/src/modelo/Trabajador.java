@@ -16,6 +16,7 @@ import javax.persistence.Id;
 @Entity
 public class Trabajador  implements Serializable{
     
+    
     private String nombre;
     private String apellido;
     @Id
