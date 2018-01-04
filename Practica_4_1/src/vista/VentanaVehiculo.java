@@ -1,6 +1,7 @@
 package vista;
 
 
+import controlador.EventoVehiculo;
 import controlador.GestionDato;
 import modelo.Vehiculo;
 
@@ -66,10 +67,10 @@ public class VentanaVehiculo extends JFrame {
 		this.boton3 = new JButton("Crear");
 		this.boton4 = new JButton("Actualizar");
 
-		//this.boton.addActionListener(new EventoUniversidad(this.gestionDato, this));
-		//this.boton2.addActionListener(new EventoUniversidad(this.gestionDato, this));
-		//this.boton3.addActionListener(new EventoUniversidad(this.gestionDato, this));
-		//this.boton4.addActionListener(new EventoUniversidad(this.gestionDato, this));
+		this.boton.addActionListener(new EventoVehiculo(this.gestionDato, this));
+		this.boton2.addActionListener(new EventoVehiculo(this.gestionDato, this));
+		this.boton3.addActionListener(new EventoVehiculo(this.gestionDato, this));
+		this.boton4.addActionListener(new EventoVehiculo(this.gestionDato, this));
 
 		this.encabezado = new Object[4];
 		this.encabezado[0] = "Marca";
@@ -83,7 +84,7 @@ public class VentanaVehiculo extends JFrame {
 		this.tabla = new JTable(this.modeloTabla);
 		this.scroll = new JScrollPane(this.tabla);
 
-		this.box = new JComboBox();
+		this.box = new JComboBox(this.gestionDato.comboBoxDuenio());
 
 		LayoutManager disenio = new GridLayout(5, 2);
 		LayoutManager disenio2 = new GridLayout(2, 1);

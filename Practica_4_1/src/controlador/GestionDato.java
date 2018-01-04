@@ -165,15 +165,33 @@ public class GestionDato {
 		return retorno;
 	}
      
-    // public Object[] comboBoxRector() {
-	//	Object[] combo = new Object[this.getPersonaList().size()];
-	//	int i = 0;
-	//	for (Rector r : this.getRectorList()) {
-	//		combo[i] = r.getNombre() + " " + r.getApellido();
-	//		i++;
-	//	}
-	//	return combo;
-	//}
+     public Object[] comboBoxDuenio() {
+		Object[] combo = new Object[this.getDuenioList().size()];
+		int i = 0;
+		for (Persona r : this.getDuenioList()) {
+			combo[i] = r.getNombre() + " " + r.getApellido();
+			i++;
+		}
+		return combo;
+	}
+     public Persona buscarDuenio2(String x) {
+		Persona retorno = null;
+		Object[] combo = new Object[this.getDuenioList().size()];
+		int i = 0;
+		for (Persona r : this.getDuenioList()) {
+			combo[i] = r.getNombre() + " " + r.getApellido();
+			i++;
+		}
+		int j = 0;
+		for (Persona r : this.DuenioList) {
+			if (combo[j].equals(x)) {
+				retorno = r;
+			}
+			j++;
+		}
+		return retorno;
+	}
+
    
    
     public Object[] cargarComboParqueadero(){
