@@ -18,6 +18,7 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+
 import modelo.Direccion;
 import modelo.Parqueadero;
 import modelo.Persona;
@@ -30,45 +31,23 @@ import modelo.Vehiculo;
  * @author Estudiante
  */
 public class GestionDato {
+    private EntityManagerFactory emf = Persistence.createEntityManagerFactory("Practica_4PU");
     private List<Direccion> DireccionList;
     private List<Parqueadero> ParqueaderoList;
     private List<Ticket>TicketList;
     private List<Trabajador>TrabajadorList;
     private List<Persona> DuenioList;
     private List<Vehiculo> vehiculoList;
-    private File datosDireccion;
-    private File datosParqueadero;
     
-     private EntityManagerFactory emf = Persistence.createEntityManagerFactory("Practica_4PU");
         
-    public GestionDato(List<Vehiculo> VehiculoList,List<Direccion> DireccionList, List<Parqueadero> ParqueaderoList, List<Ticket> TicketList, List<Trabajador> TrabajadorList, List<Persona> DuenioList, File datosDireccion, File datosParqueadero) {
+    public GestionDato(List<Vehiculo> VehiculoList,List<Direccion> DireccionList, List<Parqueadero> ParqueaderoList, List<Ticket> TicketList, List<Trabajador> TrabajadorList, List<Persona> DuenioList) {
         this.DireccionList = DireccionList;
         this.ParqueaderoList = ParqueaderoList;
         this.TicketList = TicketList;
         this.TrabajadorList = TrabajadorList;
         this.DuenioList = DuenioList;
         this.vehiculoList = VehiculoList;
-        this.datosDireccion = datosDireccion;
-        this.datosParqueadero = datosParqueadero;
-    }
-
-
-    public File getDatosDireccion() {
-        return datosDireccion;
-    }
-
-    public void setDatosDireccion(File datosDireccion) {
-        this.datosDireccion = datosDireccion;
-    }
-
-    
-
-    public File getDatosParqueadero() {
-        return datosParqueadero;
-    }
-
-    public void setDatosParqueadero(File datosParqueadero) {
-        this.datosParqueadero = datosParqueadero;
+        
     }
 
     public List<Vehiculo> getVehiculoList() {
@@ -185,103 +164,6 @@ public class GestionDato {
 		}
 		return retorno;
 	}
-    
-     
-    public boolean persistirParqueaderoList(List<Parqueadero> lista){
-        try{
-            FileWriter ae = new FileWriter(datosParqueadero.getAbsolutePath(),true);
-            BufferedWriter escritura = new BufferedWriter(ae);
-            for(Parqueadero p:lista ){
-            escritura.append(p.toString());
-            escritura.newLine();
-        }
-           
-            escritura.close();
-           return true;     
-        }
-        catch(IOException e){
-            return false;
-        }
-    }
-    
-    public boolean persistirDireccionList(List<Direccion> lista){
-        try{
-            FileWriter ae = new FileWriter(datosDireccion.getAbsolutePath(),true);
-            BufferedWriter escritura = new BufferedWriter(ae);
-            for(Direccion d:lista ){
-            escritura.append(d.toString());
-            escritura.newLine();
-        }
-           
-            escritura.close();
-           return true;     
-        }
-        catch(IOException e){
-            return false;
-        }
-    }
-    
-    
-     public Parqueadero dividido(String linea){
-        String[] lineaArray= linea.split(" / ");
-        Parqueadero p = new Parqueadero(Integer.parseInt(lineaArray[1]),lineaArray[2],this.buscarDireccion(lineaArray[2]), Integer.parseInt(lineaArray[2]),this.buscarDuenio(lineaArray[1]));
-        return p;
-    }
-     public List<Parqueadero> LeerParqueaderoList(){
-        try{
-            List<Parqueadero> p= new ArrayList<Parqueadero>();
-            FileReader ae = new FileReader(datosParqueadero.getAbsolutePath());
-            BufferedReader lectura = new BufferedReader(ae); 
-            String linea;
-            
-            
-            while((linea=lectura.readLine())!=null){
-                
-                p.add(this.dividido(linea));
-   
-            }
-             
-            lectura.close();
-                
-            return p;
-            
-                
-        }
-        catch(IOException e){
-            return null;
-        }
-    }
-     
-    public Direccion dividido2(String linea){
-        String[] lineaArray= linea.split(" / ");
-        System.out.println(lineaArray[0]);
-        Direccion d = new Direccion(Integer.parseInt(lineaArray[0]),lineaArray[1],lineaArray[2],lineaArray[3]);
-        return d;
-    }
-     public List<Direccion> LeerDireccionList(){
-        try{
-            List<Direccion> d= new ArrayList<Direccion>();
-            FileReader ae = new FileReader(datosDireccion.getAbsolutePath());
-            BufferedReader lectura = new BufferedReader(ae); 
-            String linea;
-            
-            
-            while((linea=lectura.readLine())!=null){
-                
-                d.add(this.dividido2(linea));
-   
-            }
-             
-            lectura.close();
-                
-            return d;
-            
-                
-        }
-        catch(IOException e){
-            return null;
-        }
-    }
      
     // public Object[] comboBoxRector() {
 	//	Object[] combo = new Object[this.getPersonaList().size()];
@@ -318,7 +200,7 @@ public class GestionDato {
      
    
      
-    public boolean persistirTelefono(Direccion d)
+    public boolean persistirDireccion(Direccion d)
     {
         boolean retorno=false;
         EntityManager em = this.emf.createEntityManager();
@@ -330,7 +212,7 @@ public class GestionDato {
         return retorno;
     }
 
-    public boolean persistirPersona(Parqueadero p) {
+    public boolean persistirParqueadero(Parqueadero p) {
         boolean retorno=false;
         EntityManager em = this.emf.createEntityManager();
         em.getTransaction().begin();
@@ -390,7 +272,7 @@ public class GestionDato {
      public List<Direccion> leerDireccion() {
         List<Direccion> retorno=null;        
         EntityManager em = this.emf.createEntityManager();
-        retorno=em.createQuery("SELECT d FROM Direccion d ORDER BY d.id").getResultList();        
+        retorno=em.createQuery("SELECT d FROM Direccion d ORDER BY d.cod").getResultList();        
         em.close();
         return retorno;
     }
@@ -398,7 +280,7 @@ public class GestionDato {
     public List<Parqueadero> leerParqueadero() {
         List<Parqueadero> retorno=null;        
         EntityManager em = this.emf.createEntityManager();
-        retorno=em.createQuery("SELECT p FROM Parqueadero p ORDER BY p.id").getResultList();        
+        retorno=em.createQuery("SELECT p FROM Parqueadero p ORDER BY p.cod").getResultList();        
         em.close();
         return retorno;
     }
@@ -407,7 +289,7 @@ public class GestionDato {
     public List<Persona> leerPersona() {
         List<Persona> retorno=null;        
         EntityManager em = this.emf.createEntityManager();
-        retorno=em.createQuery("SELECT per FROM Persona per ORDER BY per.id").getResultList();        
+        retorno=em.createQuery("SELECT per FROM Persona per ORDER BY per.cedula").getResultList();        
         em.close();
         return retorno;
     }

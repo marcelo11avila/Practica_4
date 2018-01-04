@@ -70,8 +70,8 @@ public class EventoParqueadero implements ActionListener{
              else{
             
             this.gD.addParqueadero(parqueadero);
-            this.gD.persistirParqueaderoList(this.gD.getParqueaderoList());
-            this.gD.LeerParqueaderoList();
+            this.gD.persistirParqueadero(parqueadero);
+            this.gD.leerParqueadero();
                  
              }
  
@@ -85,6 +85,9 @@ public class EventoParqueadero implements ActionListener{
                  JOptionPane.showMessageDialog(ventanaParqueadero, "No ingresar Universidades Repetidas", "Error", JOptionPane.ERROR_MESSAGE);
 
             }
+             catch(Exception e){
+                 JOptionPane.showMessageDialog(ventanaParqueadero, "ERROR GRANDE", "Error", JOptionPane.ERROR_MESSAGE);
+             }
             
               
          }

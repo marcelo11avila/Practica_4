@@ -28,13 +28,6 @@ public class Principal {
      */
     public static void main(String[] args) throws IOException {
         // TODO code application logic here
-         File archivo = new File("C:\\progra");
-        
-        File archivoParq = new File("C:\\progra\\archivoParqueadero.txt");
-        File archivoDire = new File("C:\\progra\\archivoDireccion.txt");
-        
-        archivoParq.createNewFile();
-        archivoDire.createNewFile();
         
         List<Direccion> d = new ArrayList<Direccion>();
         List<Parqueadero> p = new ArrayList<Parqueadero>();
@@ -43,7 +36,7 @@ public class Principal {
         List<Vehiculo> v = new ArrayList<Vehiculo>();
 
         List<Persona> due = new ArrayList<Persona>();
-        GestionDato gD = new GestionDato(v, d, p, ti, t, due, archivo, archivoDire);
+        GestionDato gD = new GestionDato(v, d, p, ti, t, due);
 
         VentanaPrincipal vP = new VentanaPrincipal(gD);
         

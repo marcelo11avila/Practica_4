@@ -64,8 +64,7 @@ public class EventoTrabajador implements ActionListener{
             }
  
             this.ventanaTrabajador.getgD().addTrabajador(trabajador);
-            this.gD.persistirDireccionList(this.gD.getDireccionList());
-            this.gD.LeerDireccionList();
+           
             Object[][] datoDireccion=this.ventanaTrabajador.cargaDatosTabla(this.ventanaTrabajador.getgD().getDireccionList().size(),4);
             this.ventanaTrabajador.setDatos(datoDireccion);
             this.ventanaTrabajador.getModeloTabla().setDataVector(this.ventanaTrabajador.getDatos(), this.ventanaTrabajador.getEncabezado());

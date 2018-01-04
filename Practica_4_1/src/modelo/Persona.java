@@ -15,9 +15,10 @@ import javax.persistence.Id;
  */
 @Entity
 public class Persona implements Serializable{
-    @Id
+    
     private String nombre;
     private String apellido;
+    @Id
     private String cedula;
 
     public Persona(String nombre, String apellido, String cedula) {
@@ -25,6 +26,10 @@ public class Persona implements Serializable{
         this.apellido = apellido;
         this.cedula = cedula;
     }
+
+    public Persona() {
+    }
+    
 
     public String getNombre() {
         return nombre;

@@ -48,7 +48,7 @@ public class EventoDireccion implements ActionListener{
             String ciu=this.ventanaDireccion.getTxtList().get(0).getText();
             String calleP=this.ventanaDireccion.getTxtList().get(1).getText();
             String calleS=this.ventanaDireccion.getTxtList().get(2).getText();
-            int cod=Integer.parseInt(this.ventanaDireccion.getTxtList().get(0).getText());
+            int cod=Integer.parseInt(this.ventanaDireccion.getTxtList().get(3).getText());
            
  
             Direccion direccion = new Direccion(cod,ciu,calleP,calleS);
@@ -64,8 +64,8 @@ public class EventoDireccion implements ActionListener{
             }
  
             this.ventanaDireccion.getGestionDato().addDireccion(direccion);
-            this.gD.persistirDireccionList(this.gD.getDireccionList());
-            this.gD.LeerDireccionList();
+            this.gD.persistirDireccion(direccion);
+            this.gD.leerDireccion();
             Object[][] datoDireccion=this.ventanaDireccion.cargaDatosTabla(this.ventanaDireccion.getGestionDato().getDireccionList().size(),4);
             this.ventanaDireccion.setDatos(datoDireccion);
             this.ventanaDireccion.getModeloTabla().setDataVector(this.ventanaDireccion.getDatos(), this.ventanaDireccion.getEncabezado());
@@ -73,6 +73,9 @@ public class EventoDireccion implements ActionListener{
              }        
             catch(java.lang.NullPointerException npe){
                 JOptionPane.showMessageDialog(ventanaDireccion, "Ingrese los datos en todas las casillas", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+             catch(Exception e){
+                JOptionPane.showMessageDialog(ventanaDireccion, "Error grande", "Error", JOptionPane.ERROR_MESSAGE);
             }
               
          }
